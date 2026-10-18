@@ -395,6 +395,9 @@
           </p>
         </div>
 
+        <!-- Interactive B2B Salon & Colorist Dashboard Preview -->
+        <SalonDashboardPreview />
+
         <!-- 3 B2B Pillars -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <!-- Pillar 1 -->
