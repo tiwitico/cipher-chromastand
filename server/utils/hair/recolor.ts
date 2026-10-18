@@ -64,7 +64,7 @@ export function recolorHair(
     for (let x = 0; x < w; x++) {
       const i = y * w + x
       const al = alpha[i]
-      if (al < 0.003) continue
+      if (al < 0.01) continue
 
       // 1. Technique spatial tone mixing (Balayage, Ombre, Highlights)
       let mix = 0
