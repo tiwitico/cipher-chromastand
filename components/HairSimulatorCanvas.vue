@@ -1,28 +1,28 @@
 <template>
-  <div class="glass-card rounded-2xl p-5 border border-slate-800 shadow-2xl flex flex-col h-full">
+  <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#F4F1DE] shadow-xl text-[#2B2D42] flex flex-col h-full">
     <!-- Header -->
-    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-      <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-rose-500 to-amber-500 flex items-center justify-center text-white shadow-md">
-          <Sparkles class="w-4 h-4" />
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-5 border-b border-[#F4F1DE] pb-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#E07A5F]/15 to-[#F4A261]/25 border border-[#E07A5F]/20 flex items-center justify-center text-[#E07A5F] shadow-sm">
+          <Sparkles class="w-5 h-5" />
         </div>
         <div>
-          <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <h2 class="text-lg font-bold text-[#2B2D42] flex items-center gap-2">
             <span>{{ colorName }}</span>
-            <span class="text-xs font-mono text-rose-300 px-2 py-0.5 rounded-full bg-rose-950/70 border border-rose-800/60">{{ colorHex }}</span>
+            <span class="text-xs font-mono text-[#E07A5F] px-2.5 py-0.5 rounded-full bg-[#E07A5F]/10 border border-[#E07A5F]/20 font-bold">{{ colorHex }}</span>
           </h2>
-          <p class="text-xs text-slate-400">Backend reads your hair area, then recolors only that area</p>
+          <p class="text-xs text-[#2B2D42]/60 mt-0.5">Physical melanin retention engine — recolors isolated hair fibers only</p>
         </div>
       </div>
 
-      <div class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-xs">
+      <div class="flex items-center bg-[#FDFBF7] p-1 rounded-2xl border border-[#F4F1DE] text-xs">
         <button
           v-for="v in views"
           :key="v.id"
           type="button"
           @click="activeView = v.id"
-          class="px-3 py-1.5 rounded-lg transition font-medium"
-          :class="activeView === v.id ? 'bg-gradient-to-r from-rose-500 to-rose-600 text-white shadow-md' : 'text-slate-400 hover:text-white'"
+          class="px-3.5 py-1.5 rounded-xl transition font-semibold"
+          :class="activeView === v.id ? 'bg-[#E07A5F] text-white shadow-sm' : 'text-[#2B2D42]/70 hover:text-[#2B2D42]'"
         >
           {{ v.label }}
         </button>
@@ -30,71 +30,71 @@
     </div>
 
     <!-- Detection summary -->
-    <div v-if="result" class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3 text-xs">
-      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-2.5">
-        <span class="text-[10px] uppercase tracking-wider text-slate-500">Hair area read</span>
-        <p class="font-bold text-white">{{ result.hair.areaPercent }}% of photo</p>
-        <span class="text-[10px] text-slate-400">{{ result.hair.lengthClass }} length · {{ Math.round(result.hair.confidence * 100) }}% confidence</span>
+    <div v-if="result" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4 text-xs">
+      <div class="bg-[#FDFBF7] border border-[#F4F1DE] rounded-2xl p-3">
+        <span class="text-[10px] uppercase tracking-wider text-[#2B2D42]/50 font-bold">Hair Area Read</span>
+        <p class="font-bold text-[#2B2D42] mt-0.5">{{ result.hair.areaPercent }}% of photo</p>
+        <span class="text-[10px] text-[#2B2D42]/60">{{ result.hair.lengthClass }} length · {{ Math.round(result.hair.confidence * 100) }}% confidence</span>
       </div>
-      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-2.5">
-        <span class="text-[10px] uppercase tracking-wider text-slate-500">Current hair color</span>
-        <p class="font-bold text-white flex items-center gap-1.5">
-          <span class="w-3.5 h-3.5 rounded-full border border-white/20" :style="{ backgroundColor: result.currentColor.hex }"></span>
+      <div class="bg-[#FDFBF7] border border-[#F4F1DE] rounded-2xl p-3">
+        <span class="text-[10px] uppercase tracking-wider text-[#2B2D42]/50 font-bold">Natural Hair Color</span>
+        <p class="font-bold text-[#2B2D42] mt-0.5 flex items-center gap-1.5">
+          <span class="w-3.5 h-3.5 rounded-full border border-black/10 shadow-sm" :style="{ backgroundColor: result.currentColor.hex }"></span>
           Level {{ result.currentColor.level }}
         </p>
-        <span class="text-[10px] text-slate-400">{{ result.currentColor.levelName }} · {{ result.currentColor.undertone }}</span>
+        <span class="text-[10px] text-[#2B2D42]/60">{{ result.currentColor.levelName }} · {{ result.currentColor.undertone }}</span>
       </div>
-      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-2.5">
-        <span class="text-[10px] uppercase tracking-wider text-slate-500">Bleach needed?</span>
-        <p class="font-bold" :class="result.feasibility.needsBleach ? 'text-rose-400' : 'text-emerald-400'">
-          {{ result.feasibility.needsBleach ? 'Yes' : 'No' }}
+      <div class="bg-[#FDFBF7] border border-[#F4F1DE] rounded-2xl p-3">
+        <span class="text-[10px] uppercase tracking-wider text-[#2B2D42]/50 font-bold">Bleach Needed?</span>
+        <p class="font-bold mt-0.5" :class="result.feasibility.needsBleach ? 'text-[#E07A5F]' : 'text-emerald-700'">
+          {{ result.feasibility.needsBleach ? 'Yes (Decolorize)' : 'No (Direct Lift)' }}
         </p>
-        <span class="text-[10px] text-slate-400">{{ result.feasibility.headline }}</span>
+        <span class="text-[10px] text-[#2B2D42]/60">{{ result.feasibility.headline }}</span>
       </div>
-      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-2.5">
-        <span class="text-[10px] uppercase tracking-wider text-slate-500">Detection method</span>
-        <p class="font-bold text-white text-[11px] leading-tight">{{ result.method === 'segformer_hair_model' ? 'SegFormer hair segmentation (AI)' : result.method === 'gemini_mask+skin_exclusion' ? 'Gemini mask + skin exclusion' : 'Fallback colour/face detector' }}</p>
-        <span class="text-[10px] text-slate-400">Grey: ~{{ result.currentColor.grayPercentage }}%</span>
+      <div class="bg-[#FDFBF7] border border-[#F4F1DE] rounded-2xl p-3">
+        <span class="text-[10px] uppercase tracking-wider text-[#2B2D42]/50 font-bold">Detection Engine</span>
+        <p class="font-bold text-[#2B2D42] text-[11px] leading-tight mt-0.5">{{ result.method === 'segformer_hair_model' ? 'SegFormer hair segmentation (AI)' : result.method === 'gemini_mask+skin_exclusion' ? 'Gemini mask + skin exclusion' : 'Fallback colour/face detector' }}</p>
+        <span class="text-[10px] text-[#2B2D42]/60">Grey: ~{{ result.currentColor.grayPercentage }}%</span>
       </div>
     </div>
 
     <!-- Viewport -->
-    <div class="relative flex-1 min-h-[460px] rounded-xl overflow-hidden bg-slate-950 border border-slate-800/90 flex items-center justify-center p-3">
+    <div class="relative flex-1 min-h-[460px] rounded-2xl overflow-hidden bg-[#FDFBF7] border border-[#F4F1DE] flex items-center justify-center p-3 shadow-inner">
       <!-- Loading / error -->
-      <div v-if="isLoading && !result" class="text-sm text-slate-300 flex items-center gap-2">
-        <Loader2 class="w-4 h-4 animate-spin text-rose-400" /> Reading hair in your photo...
+      <div v-if="isLoading && !result" class="text-sm text-[#2B2D42]/80 flex items-center gap-2 font-medium">
+        <Loader2 class="w-4 h-4 animate-spin text-[#E07A5F]" /> Reading hair in your photo...
       </div>
       <div v-else-if="errorMessage" class="max-w-sm text-center space-y-2">
-        <AlertTriangle class="w-8 h-8 text-amber-400 mx-auto" />
-        <p class="text-sm font-semibold text-slate-100">{{ errorMessage }}</p>
-        <p class="text-xs text-slate-400">Try a bright, front-facing selfie where your hair is visible above and around your face.</p>
+        <AlertTriangle class="w-8 h-8 text-[#F4A261] mx-auto" />
+        <p class="text-sm font-bold text-[#2B2D42]">{{ errorMessage }}</p>
+        <p class="text-xs text-[#2B2D42]/60">Try a bright, front-facing selfie where your hair is visible above and around your face.</p>
       </div>
 
       <template v-else-if="result">
         <!-- side by side -->
         <div v-if="activeView === 'side_by_side'" class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
-          <figure class="bg-slate-900/80 rounded-xl overflow-hidden border border-slate-800">
-            <figcaption class="py-2 px-3 bg-slate-800/80 text-xs font-semibold text-slate-300 flex justify-between">
-              <span>Before</span><span class="font-mono text-slate-400">Level {{ result.currentColor.level }}</span>
+          <figure class="bg-white rounded-2xl overflow-hidden border border-[#F4F1DE] shadow-sm">
+            <figcaption class="py-2.5 px-4 bg-[#FDFBF7] text-xs font-bold text-[#2B2D42] flex justify-between border-b border-[#F4F1DE]">
+              <span>Before (Natural)</span><span class="font-mono text-[#2B2D42]/60 font-semibold">Level {{ result.currentColor.level }}</span>
             </figcaption>
             <img :src="showHairArea ? result.hair.overlayImage : photo" alt="Original" class="w-full object-contain max-h-[520px]" />
           </figure>
-          <figure class="bg-slate-900/80 rounded-xl overflow-hidden border border-rose-500/30">
-            <figcaption class="py-2 px-3 bg-slate-800/80 text-xs font-semibold text-rose-300 flex justify-between">
-              <span>After - hair only</span><span class="font-mono text-slate-400">{{ colorName }}</span>
+          <figure class="bg-white rounded-2xl overflow-hidden border border-[#E07A5F]/40 shadow-sm">
+            <figcaption class="py-2.5 px-4 bg-[#E07A5F]/10 text-xs font-bold text-[#E07A5F] flex justify-between border-b border-[#E07A5F]/20">
+              <span>After (Hair Only)</span><span class="font-mono text-[#2B2D42]/60 font-semibold">{{ colorName }}</span>
             </figcaption>
             <img :src="result.resultImage" alt="Recolored" class="w-full object-contain max-h-[520px]" />
           </figure>
         </div>
 
         <!-- wipe -->
-        <div v-else-if="activeView === 'split_slider'" class="relative w-full max-w-[480px] mx-auto select-none">
+        <div v-else-if="activeView === 'split_slider'" class="relative w-full max-w-[480px] mx-auto select-none rounded-2xl overflow-hidden shadow-md">
           <img :src="photo" alt="Original" class="w-full block" />
           <div class="absolute inset-0 overflow-hidden" :style="{ width: `${splitPos}%` }">
             <img :src="result.resultImage" alt="Recolored" class="block max-w-none h-full" :style="{ width: `${100 * (100 / Math.max(splitPos, 0.01))}%` }" />
           </div>
-          <div class="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_12px_rgba(255,255,255,0.8)] z-20" :style="{ left: `${splitPos}%` }">
-            <div class="absolute top-1/2 -translate-y-1/2 -ml-3.5 w-8 h-8 rounded-full bg-rose-500 border-2 border-white flex items-center justify-center text-white">
+          <div class="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_12px_rgba(0,0,0,0.5)] z-20" :style="{ left: `${splitPos}%` }">
+            <div class="absolute top-1/2 -translate-y-1/2 -ml-3.5 w-8 h-8 rounded-full bg-[#E07A5F] border-2 border-white flex items-center justify-center text-white shadow-lg">
               <Sliders class="w-4 h-4" />
             </div>
           </div>
@@ -103,34 +103,34 @@
 
         <!-- single -->
         <div v-else class="w-full max-w-[480px] mx-auto">
-          <img :src="result.resultImage" alt="Recolored" class="w-full rounded-xl border border-slate-800" />
+          <img :src="result.resultImage" alt="Recolored" class="w-full rounded-2xl border border-[#F4F1DE] shadow-sm" />
         </div>
 
-        <div v-if="isLoading" class="absolute top-3 right-3 text-[11px] text-slate-200 bg-slate-900/90 border border-slate-700 rounded-lg px-2.5 py-1 flex items-center gap-1.5">
-          <Loader2 class="w-3 h-3 animate-spin text-rose-400" /> Updating...
+        <div v-if="isLoading" class="absolute top-3 right-3 text-[11px] text-[#2B2D42] bg-white/95 border border-[#F4F1DE] shadow rounded-xl px-3 py-1.5 flex items-center gap-1.5 font-semibold">
+          <Loader2 class="w-3.5 h-3.5 animate-spin text-[#E07A5F]" /> Updating...
         </div>
       </template>
 
       <!-- bottom bar -->
-      <div class="absolute bottom-3 inset-x-3 flex items-center justify-between">
-        <label class="text-[11px] text-slate-300 bg-slate-900/85 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-slate-800 flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" v-model="showHairArea" class="accent-rose-500" />
-          Show detected hair area
+      <div class="absolute bottom-3 inset-x-3 flex items-center justify-between z-10">
+        <label class="text-[11px] font-semibold text-[#2B2D42] bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-[#F4F1DE] shadow-sm flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" v-model="showHairArea" class="accent-[#E07A5F]" />
+          Show isolated hair area
         </label>
         <button
           type="button"
           @click="downloadComparisonCard"
           :disabled="!result"
-          class="px-3.5 py-1.5 rounded-lg bg-slate-900/85 hover:bg-slate-800 border border-slate-700 text-xs font-medium text-slate-200 flex items-center gap-1.5 disabled:opacity-40"
+          class="px-4 py-1.5 rounded-xl bg-white/90 hover:bg-white text-xs font-bold text-[#2B2D42] border border-[#F4F1DE] shadow-sm flex items-center gap-1.5 disabled:opacity-40 transition"
         >
-          <Download class="w-3.5 h-3.5 text-rose-400" /> Export Side-by-Side
+          <Download class="w-3.5 h-3.5 text-[#E07A5F]" /> Export Snapshot
         </button>
       </div>
     </div>
 
     <!-- Warnings -->
-    <ul v-if="result?.warnings?.length" class="mt-3 space-y-1 text-[11px] text-amber-300/90">
-      <li v-for="(w, i) in result.warnings" :key="i" class="flex gap-1.5"><AlertTriangle class="w-3 h-3 mt-0.5 flex-shrink-0" /> {{ w }}</li>
+    <ul v-if="result?.warnings?.length" class="mt-3 space-y-1 text-xs text-[#E07A5F]">
+      <li v-for="(w, i) in result.warnings" :key="i" class="flex gap-1.5"><AlertTriangle class="w-3.5 h-3.5 mt-0.5 flex-shrink-0" /> {{ w }}</li>
     </ul>
   </div>
 </template>

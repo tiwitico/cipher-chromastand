@@ -4,45 +4,68 @@
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100 font-sans antialiased min-h-screen selection:bg-rose-500/30 selection:text-rose-200;
+    background-color: #FDFBF7;
+    color: #2B2D42;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-/* Custom scrollbars */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #0b0f17;
-}
-::-webkit-scrollbar-thumb {
-  background: #252e3e;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3b465b;
+::selection {
+  background-color: #F4A261;
+  color: #2B2D42;
 }
 
-/* Glassmorphism utility */
-.glass-panel {
-  background: rgba(18, 23, 34, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Custom Minimalist Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FDFBF7;
+}
+::-webkit-scrollbar-thumb {
+  background: #E8E2CD;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D5CCA8;
+}
+
+/* Minimalist luxury card utility */
+.minimal-card {
+  background: #FFFFFF;
+  border: 1px solid #F4F1DE;
+  box-shadow: 0 4px 20px -2px rgba(43, 45, 66, 0.05);
 }
 
 .glass-card {
-  background: rgba(22, 28, 42, 0.6);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid #F4F1DE;
+  box-shadow: 0 10px 30px -4px rgba(43, 45, 66, 0.06);
 }
 
-.glow-subtle {
-  box-shadow: 0 0 25px -5px rgba(223, 183, 108, 0.15);
+.glow-warm {
+  box-shadow: 0 10px 30px -5px rgba(224, 122, 95, 0.18);
 }
 
-.glow-rose {
-  box-shadow: 0 0 30px -5px rgba(229, 128, 146, 0.25);
+/* Print Styles for Salon Consultation Card Export */
+@media print {
+  header, footer, nav, button:not(.print-include), .no-print {
+    display: none !important;
+  }
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  .print-area {
+    display: block !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
 }
+

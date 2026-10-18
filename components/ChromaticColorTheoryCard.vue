@@ -1,22 +1,20 @@
 <template>
-  <div class="glass-card rounded-2xl p-5 sm:p-6 border border-slate-800 shadow-2xl space-y-5 bg-gradient-to-b from-slate-900/90 via-slate-950 to-slate-950">
+  <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#F4F1DE] shadow-xl space-y-6 text-[#2B2D42]">
     
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800/80 pb-4">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-500 via-rose-500 to-amber-400 p-0.5 shadow-lg shadow-purple-500/25">
-          <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-            <Bot class="w-5 h-5 text-rose-400" />
-          </div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#F4F1DE] pb-5">
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#E07A5F]/15 to-[#F4A261]/25 border border-[#E07A5F]/20 flex items-center justify-center text-[#E07A5F] shadow-sm">
+          <Bot class="w-6 h-6" />
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <h3 class="text-base font-bold text-white">Gemini Chromatic Intelligence</h3>
-            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/30 font-semibold">
+            <h3 class="text-lg font-bold text-[#2B2D42]">Gemini Chromatic Intelligence</h3>
+            <span class="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-[#F4F1DE] text-[#2B2D42] border border-[#E8E2CD] font-semibold">
               Color Theory Engine
             </span>
           </div>
-          <p class="text-xs text-slate-400">Multimodal facial tone extraction & CIELAB chromatic harmony mapping</p>
+          <p class="text-xs text-[#2B2D42]/60 mt-0.5">Multimodal facial tone extraction & CIELAB chromatic harmony mapping</p>
         </div>
       </div>
 
@@ -25,131 +23,131 @@
         type="button"
         @click="runAnalysis"
         :disabled="isLoading"
-        class="self-start sm:self-auto px-4 py-2 rounded-xl bg-gradient-to-r from-purple-500 via-rose-500 to-amber-500 hover:from-purple-600 hover:to-amber-600 text-white text-xs font-bold shadow-lg shadow-rose-500/20 flex items-center gap-2 transition active:scale-95 disabled:opacity-50"
+        class="self-start sm:self-auto bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-5 py-2.5 text-xs shadow-md hover:opacity-95 transition-all flex items-center gap-2 active:scale-95 disabled:opacity-50"
       >
         <RefreshCw v-if="isLoading" class="w-3.5 h-3.5 animate-spin" />
         <Wand2 v-else class="w-3.5 h-3.5" />
-        <span>{{ isLoading ? 'Analyzing Chromatic Vectors...' : 'Analyze My Face' }}</span>
+        <span>{{ isLoading ? 'Analyzing Chromatic Vectors...' : 'Analyze Facial Chroma' }}</span>
       </button>
     </div>
 
     <!-- Loading State Skeleton -->
-    <div v-if="isLoading" class="py-8 flex flex-col items-center justify-center text-center space-y-3">
+    <div v-if="isLoading" class="py-10 flex flex-col items-center justify-center text-center space-y-3">
       <div class="relative w-12 h-12">
-        <div class="w-12 h-12 rounded-full border-2 border-rose-500/20 border-t-rose-500 animate-spin"></div>
+        <div class="w-12 h-12 rounded-full border-2 border-[#E07A5F]/20 border-t-[#E07A5F] animate-spin"></div>
         <div class="absolute inset-0 flex items-center justify-center">
-          <Sparkles class="w-5 h-5 text-amber-400 animate-pulse" />
+          <Sparkles class="w-5 h-5 text-[#F4A261] animate-pulse" />
         </div>
       </div>
       <div>
-        <p class="text-sm font-semibold text-slate-200">Gemini 2.5 Inspecting Facial Chromaticity...</p>
-        <p class="text-xs text-slate-400">Extracting L*a*b* coordinates, iris warmth, and calculating color harmony matrices</p>
+        <p class="text-sm font-bold text-[#2B2D42]">Gemini 2.5 Inspecting Facial Chromaticity...</p>
+        <p class="text-xs text-[#2B2D42]/60">Extracting L*a*b* coordinates, iris warmth, and calculating color harmony matrices</p>
       </div>
     </div>
 
     <!-- Active Profile Content -->
-    <div v-else-if="chromaticProfile" class="space-y-5">
+    <div v-else-if="chromaticProfile" class="space-y-6">
       
       <!-- Chromatic Diagnosis Metrics Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <!-- Skin Undertone with Swatch -->
-        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+        <div class="bg-[#FDFBF7] p-4 rounded-2xl border border-[#F4F1DE]">
           <div class="flex items-center justify-between mb-1">
-            <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Skin Tone L*a*b*</span>
+            <span class="text-[10px] uppercase font-bold text-[#2B2D42]/50 tracking-wider">Skin Tone L*a*b*</span>
             <div
-              class="w-3.5 h-3.5 rounded-full border border-white/20 shadow-sm"
+              class="w-4 h-4 rounded-full border border-black/10 shadow-sm"
               :style="{ backgroundColor: chromaticProfile.skinToneLab.hex }"
               :title="chromaticProfile.skinToneLab.hex"
             ></div>
           </div>
-          <p class="text-xs font-bold text-rose-300 truncate">{{ skinUndertone || 'Warm Golden' }}</p>
-          <span class="text-[10px] text-slate-400 font-mono block">
+          <p class="text-xs font-bold text-[#E07A5F] truncate">{{ skinUndertone || 'Warm Golden' }}</p>
+          <span class="text-[10px] text-[#2B2D42]/60 font-mono block mt-0.5">
             L:{{ chromaticProfile.skinToneLab.L }} a:{{ chromaticProfile.skinToneLab.a }} b:{{ chromaticProfile.skinToneLab.b }}
           </span>
         </div>
 
         <!-- Eye Iris Chroma -->
-        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+        <div class="bg-[#FDFBF7] p-4 rounded-2xl border border-[#F4F1DE]">
           <div class="flex items-center justify-between mb-1">
-            <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Iris Chroma</span>
+            <span class="text-[10px] uppercase font-bold text-[#2B2D42]/50 tracking-wider">Iris Chroma</span>
             <div
-              class="w-3.5 h-3.5 rounded-full border border-white/20 shadow-sm"
+              class="w-4 h-4 rounded-full border border-black/10 shadow-sm"
               :style="{ backgroundColor: chromaticProfile.eyeChroma.hex }"
               :title="chromaticProfile.eyeChroma.name"
             ></div>
           </div>
-          <p class="text-xs font-bold text-amber-300 truncate">{{ chromaticProfile.eyeChroma.name }}</p>
-          <span class="text-[10px] text-slate-400 block">{{ chromaticProfile.eyeChroma.warmth }} Undertone</span>
+          <p class="text-xs font-bold text-[#F4A261] truncate">{{ chromaticProfile.eyeChroma.name }}</p>
+          <span class="text-[10px] text-[#2B2D42]/60 block mt-0.5">{{ chromaticProfile.eyeChroma.warmth }} Undertone</span>
         </div>
 
         <!-- Contrast Category -->
-        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
-          <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider block mb-1">Facial Contrast</span>
-          <p class="text-xs font-bold text-purple-300 truncate">{{ chromaticProfile.contrastLevel }}</p>
-          <span class="text-[10px] text-slate-400 block">Skin-to-Hair Delta</span>
+        <div class="bg-[#FDFBF7] p-4 rounded-2xl border border-[#F4F1DE]">
+          <span class="text-[10px] uppercase font-bold text-[#2B2D42]/50 tracking-wider block mb-1">Facial Contrast</span>
+          <p class="text-xs font-bold text-[#2B2D42] truncate">{{ chromaticProfile.contrastLevel }}</p>
+          <span class="text-[10px] text-[#2B2D42]/60 block mt-0.5">Skin-to-Hair Delta</span>
         </div>
 
         <!-- Seasonal Palette -->
-        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
-          <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider block mb-1">Seasonal Palette</span>
-          <p class="text-xs font-bold text-emerald-300 truncate">{{ chromaticProfile.seasonalArchetype }}</p>
-          <span class="text-[10px] text-slate-400 block">12-Season Matrix</span>
+        <div class="bg-[#FDFBF7] p-4 rounded-2xl border border-[#F4F1DE]">
+          <span class="text-[10px] uppercase font-bold text-[#2B2D42]/50 tracking-wider block mb-1">Seasonal Palette</span>
+          <p class="text-xs font-bold text-emerald-700 truncate">{{ chromaticProfile.seasonalArchetype }}</p>
+          <span class="text-[10px] text-[#2B2D42]/60 block mt-0.5">12-Season Matrix</span>
         </div>
       </div>
 
       <!-- Color Theory Scientific Rationale -->
-      <div class="p-3.5 rounded-xl bg-purple-950/20 border border-purple-500/20 text-xs text-purple-200/90 leading-relaxed flex items-start gap-2.5">
-        <Sparkles class="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" />
+      <div class="p-4 rounded-2xl bg-[#FDFBF7] border border-[#F4F1DE] text-xs text-[#2B2D42]/85 leading-relaxed flex items-start gap-3">
+        <Sparkles class="w-4 h-4 text-[#E07A5F] flex-shrink-0 mt-0.5" />
         <div>
-          <strong class="text-purple-300">Chromatic Matrix Rationale: </strong>
+          <strong class="text-[#2B2D42]">Chromatic Matrix Rationale: </strong>
           <span>{{ chromaticProfile.colorTheoryReasoning }}</span>
         </div>
       </div>
 
       <!-- 3 Programmatic Color Theory Recommendations -->
       <div>
-        <div class="flex items-center justify-between mb-3">
-          <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-            <Palette class="w-3.5 h-3.5 text-rose-400" />
+        <div class="flex items-center justify-between mb-3.5">
+          <h4 class="text-xs font-bold text-[#2B2D42] uppercase tracking-wider flex items-center gap-2">
+            <Palette class="w-4 h-4 text-[#E07A5F]" />
             <span>Target Color Recommendations Based on Your Face</span>
           </h4>
-          <span class="text-[10px] text-slate-400">1-Click to Simulate on Your Photo</span>
+          <span class="text-[11px] text-[#2B2D42]/60 font-medium">1-Click to Simulate on Your Photo</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
           <div
             v-for="(rec, idx) in recommendedColors"
             :key="idx"
-            class="bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-xl p-3.5 flex flex-col justify-between transition group shadow-md"
+            class="bg-[#FDFBF7] border border-[#F4F1DE] hover:border-[#E07A5F]/40 rounded-2xl p-4 flex flex-col justify-between transition group shadow-sm hover:shadow"
           >
-            <div class="space-y-2 mb-3">
+            <div class="space-y-2.5 mb-3.5">
               <!-- Category Badge -->
               <div class="flex items-center justify-between">
                 <span
-                  class="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full"
+                  class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full"
                   :class="getHarmonyBadgeClass(rec.harmonyType)"
                 >
                   {{ getHarmonyTitle(rec.harmonyType) }}
                 </span>
-                <span class="text-[10px] font-mono text-slate-400">Level {{ rec.targetLevel }}</span>
+                <span class="text-[11px] font-mono text-[#2B2D42]/60 font-semibold">Level {{ rec.targetLevel }}</span>
               </div>
 
               <!-- Color Name & Swatch -->
-              <div class="flex items-center gap-2.5">
+              <div class="flex items-center gap-3">
                 <div
-                  class="w-6 h-6 rounded-lg border border-white/20 shadow flex-shrink-0"
+                  class="w-7 h-7 rounded-xl border border-black/10 shadow-sm flex-shrink-0"
                   :style="{ backgroundColor: rec.colorHex }"
                 ></div>
                 <div>
-                  <h5 class="text-xs font-bold text-white group-hover:text-rose-300 transition line-clamp-1">
+                  <h5 class="text-xs font-bold text-[#2B2D42] group-hover:text-[#E07A5F] transition line-clamp-1">
                     {{ rec.colorName }}
                   </h5>
-                  <span class="text-[10px] font-mono text-slate-400">{{ rec.colorHex }}</span>
+                  <span class="text-[10px] font-mono text-[#2B2D42]/50">{{ rec.colorHex }}</span>
                 </div>
               </div>
 
               <!-- Scientific Rationale -->
-              <p class="text-[11px] text-slate-400 leading-snug">
+              <p class="text-[11px] text-[#2B2D42]/70 leading-relaxed">
                 {{ rec.whyItFits }}
               </p>
             </div>
@@ -158,7 +156,7 @@
             <button
               type="button"
               @click="applyRecommendation(rec)"
-              class="w-full py-2 px-3 rounded-lg bg-slate-800 hover:bg-rose-500 hover:text-white text-slate-200 text-xs font-bold border border-slate-700 hover:border-rose-500 transition flex items-center justify-center gap-1.5 active:scale-95 shadow"
+              class="w-full py-2.5 px-3 rounded-xl bg-white hover:bg-gradient-to-r hover:from-[#E07A5F] hover:to-[#F4A261] hover:text-white text-[#2B2D42] text-xs font-bold border border-[#F4F1DE] hover:border-transparent transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-sm"
             >
               <span>Simulate This Shade</span>
               <ArrowRight class="w-3.5 h-3.5" />
@@ -168,38 +166,38 @@
       </div>
 
       <!-- Judges Deep-Dive Accordion: "Why This Isn't a Generic Filter" -->
-      <div class="border border-slate-800 rounded-xl overflow-hidden bg-slate-950/60">
+      <div class="border border-[#F4F1DE] rounded-2xl overflow-hidden bg-[#FDFBF7]">
         <button
           type="button"
           @click="isDeepDiveOpen = !isDeepDiveOpen"
-          class="w-full p-3 flex items-center justify-between text-left hover:bg-slate-900/60 transition"
+          class="w-full p-4 flex items-center justify-between text-left hover:bg-white/70 transition"
         >
-          <div class="flex items-center gap-2">
-            <Info class="w-4 h-4 text-amber-400" />
-            <span class="text-xs font-bold text-slate-200">
+          <div class="flex items-center gap-2.5">
+            <Info class="w-4 h-4 text-[#F4A261]" />
+            <span class="text-xs font-bold text-[#2B2D42]">
               For Judges: How AuraHair Avoids Generic Filters (Color Theory & CIELAB Pipeline)
             </span>
           </div>
-          <component :is="isDeepDiveOpen ? ChevronUp : ChevronDown" class="w-4 h-4 text-slate-400" />
+          <component :is="isDeepDiveOpen ? ChevronUp : ChevronDown" class="w-4 h-4 text-[#2B2D42]/50" />
         </button>
 
-        <div v-show="isDeepDiveOpen" class="p-4 pt-1 border-t border-slate-800/80 space-y-3 text-[11px] text-slate-300">
+        <div v-show="isDeepDiveOpen" class="p-5 pt-2 border-t border-[#F4F1DE] space-y-3 text-xs text-[#2B2D42]/80">
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-            <div class="bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
-              <span class="text-amber-400 font-bold block mb-1">1. Multimodal Feature Reasoning</span>
-              <p class="text-slate-400">
+            <div class="bg-white p-3.5 rounded-xl border border-[#F4F1DE] shadow-sm">
+              <span class="text-[#E07A5F] font-bold block mb-1">1. Multimodal Feature Reasoning</span>
+              <p class="text-[11px] text-[#2B2D42]/70 leading-relaxed">
                 Gemini 2.5 extracts calibrated L*a*b* coordinates for facial dermis and iris warmth, rather than applying an indiscriminate screen blend across pixels.
               </p>
             </div>
-            <div class="bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
-              <span class="text-rose-400 font-bold block mb-1">2. Luminosity & Highlight Retention</span>
-              <p class="text-slate-400">
+            <div class="bg-white p-3.5 rounded-xl border border-[#F4F1DE] shadow-sm">
+              <span class="text-[#F4A261] font-bold block mb-1">2. Luminosity & Highlight Retention</span>
+              <p class="text-[11px] text-[#2B2D42]/70 leading-relaxed">
                 Our rendering pipeline operates in CIELAB color space, preserving hair strand specular highlights and natural shadow depth without muddying or artificial glow.
               </p>
             </div>
-            <div class="bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
-              <span class="text-emerald-400 font-bold block mb-1">3. Chemical Dispensary Physics</span>
-              <p class="text-slate-400">
+            <div class="bg-white p-3.5 rounded-xl border border-[#F4F1DE] shadow-sm">
+              <span class="text-emerald-700 font-bold block mb-1">3. Chemical Dispensary Physics</span>
+              <p class="text-[11px] text-[#2B2D42]/70 leading-relaxed">
                 Every recommended hue is tied to real developer volumes (10-40 Vol) and bleach gram formulas based on the user's starting level to ensure physical repeatability.
               </p>
             </div>
@@ -211,11 +209,11 @@
 
     <!-- Empty State -->
     <div v-else class="py-6 text-center space-y-2">
-      <p class="text-xs text-slate-400">Click "Analyze My Face" to extract chromatic vectors and get personalized color recommendations</p>
+      <p class="text-xs text-[#2B2D42]/60">Click "Analyze Facial Chroma" to extract chromatic vectors and get personalized color recommendations</p>
       <button
         type="button"
         @click="runAnalysis"
-        class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-rose-300 rounded-xl text-xs font-semibold border border-slate-700 transition"
+        class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-5 py-2.5 text-xs shadow-md hover:opacity-95 transition-all"
       >
         Run Chromatic Analysis
       </button>
@@ -305,13 +303,13 @@ function getHarmonyTitle(type?: string) {
 function getHarmonyBadgeClass(type?: string) {
   switch (type) {
     case 'analogous_enhancer':
-      return 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+      return 'bg-[#F4A261]/20 text-[#2B2D42] border border-[#F4A261]/30 font-semibold'
     case 'complementary_eye_pop':
-      return 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+      return 'bg-[#E07A5F]/20 text-[#E07A5F] border border-[#E07A5F]/30 font-semibold'
     case 'high_fashion_contrast':
-      return 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
+      return 'bg-[#2B2D42]/10 text-[#2B2D42] border border-[#2B2D42]/20 font-semibold'
     default:
-      return 'bg-slate-800 text-slate-300'
+      return 'bg-[#F4F1DE] text-[#2B2D42]'
   }
 }
 

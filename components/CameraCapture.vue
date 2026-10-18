@@ -1,21 +1,21 @@
 <template>
-  <div class="glass-card rounded-2xl p-5 border border-slate-800 shadow-xl">
-    <div class="flex items-center justify-between mb-4">
+  <div class="bg-white rounded-3xl p-6 border border-[#F4F1DE] shadow-xl text-[#2B2D42]">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 border-b border-[#F4F1DE] pb-4">
       <div>
-        <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-          <Camera class="w-5 h-5 text-rose-400" />
-          <span>Selfie Capture & Model</span>
+        <h3 class="text-lg font-bold text-[#2B2D42] flex items-center gap-2">
+          <Camera class="w-5 h-5 text-[#E07A5F]" />
+          <span>Selfie Capture & Studio Models</span>
         </h3>
-        <p class="text-xs text-slate-400">Capture your selfie, upload a photo, or choose a studio model</p>
+        <p class="text-xs text-[#2B2D42]/60 mt-0.5">Capture your selfie, upload a photo, or choose a studio model</p>
       </div>
 
       <!-- Mode Selector -->
-      <div class="flex items-center gap-1 bg-slate-900/80 p-1 rounded-lg border border-slate-800 text-xs">
+      <div class="flex items-center gap-1 bg-[#FDFBF7] p-1 rounded-xl border border-[#F4F1DE] text-xs">
         <button
           type="button"
           @click="activeMode = 'webcam'"
-          :class="activeMode === 'webcam' ? 'bg-rose-500 text-white font-medium shadow' : 'text-slate-400 hover:text-white'"
-          class="px-2.5 py-1.5 rounded-md transition flex items-center gap-1.5"
+          :class="activeMode === 'webcam' ? 'bg-[#E07A5F] text-white font-semibold shadow-sm' : 'text-[#2B2D42]/70 hover:text-[#2B2D42]'"
+          class="px-3 py-1.5 rounded-lg transition flex items-center gap-1.5"
         >
           <Camera class="w-3.5 h-3.5" />
           <span>Webcam</span>
@@ -23,8 +23,8 @@
         <button
           type="button"
           @click="activeMode = 'upload'"
-          :class="activeMode === 'upload' ? 'bg-rose-500 text-white font-medium shadow' : 'text-slate-400 hover:text-white'"
-          class="px-2.5 py-1.5 rounded-md transition flex items-center gap-1.5"
+          :class="activeMode === 'upload' ? 'bg-[#E07A5F] text-white font-semibold shadow-sm' : 'text-[#2B2D42]/70 hover:text-[#2B2D42]'"
+          class="px-3 py-1.5 rounded-lg transition flex items-center gap-1.5"
         >
           <UploadCloud class="w-3.5 h-3.5" />
           <span>Upload</span>
@@ -32,8 +32,8 @@
         <button
           type="button"
           @click="activeMode = 'samples'"
-          :class="activeMode === 'samples' ? 'bg-rose-500 text-white font-medium shadow' : 'text-slate-400 hover:text-white'"
-          class="px-2.5 py-1.5 rounded-md transition flex items-center gap-1.5"
+          :class="activeMode === 'samples' ? 'bg-[#E07A5F] text-white font-semibold shadow-sm' : 'text-[#2B2D42]/70 hover:text-[#2B2D42]'"
+          class="px-3 py-1.5 rounded-lg transition flex items-center gap-1.5"
         >
           <Users class="w-3.5 h-3.5" />
           <span>Models</span>
@@ -42,7 +42,7 @@
     </div>
 
     <!-- Active Mode Container -->
-    <div class="relative rounded-xl overflow-hidden bg-slate-900 border border-slate-800/80 aspect-[4/5] max-h-[380px] flex items-center justify-center">
+    <div class="relative rounded-2xl overflow-hidden bg-[#2B2D42] border border-[#F4F1DE] aspect-[4/5] max-h-[380px] flex items-center justify-center shadow-inner">
       
       <!-- 1. WEBCAM MODE -->
       <div v-if="activeMode === 'webcam'" class="w-full h-full relative flex items-center justify-center">
@@ -70,7 +70,7 @@
           class="absolute top-2.5 inset-x-2.5 flex items-center justify-between z-10 pointer-events-none"
         >
           <div
-            class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold backdrop-blur-md shadow"
+            class="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-semibold backdrop-blur-md shadow"
             :class="lightingBadgeClass"
           >
             <span class="w-2 h-2 rounded-full animate-pulse" :class="lightingDotClass"></span>
@@ -80,7 +80,7 @@
           <button
             type="button"
             @click.stop="toggleCameraFacing"
-            class="pointer-events-auto p-1.5 rounded-full bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-700 backdrop-blur-md transition shadow"
+            class="pointer-events-auto p-2 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md transition shadow"
             title="Flip Camera"
           >
             <RefreshCw class="w-3.5 h-3.5" />
@@ -92,15 +92,14 @@
           v-if="isStreaming && !capturedPhoto"
           class="absolute inset-0 pointer-events-none flex flex-col items-center justify-center"
         >
-          <div class="relative w-56 h-72 border-2 border-dashed border-rose-400/70 rounded-[50%] shadow-[0_0_25px_rgba(244,63,94,0.3)] flex items-center justify-center">
-            <!-- Center target crosshair subtle -->
-            <div class="w-3 h-0.5 bg-rose-400/40 absolute"></div>
-            <div class="h-3 w-0.5 bg-rose-400/40 absolute"></div>
-            <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-slate-900/90 text-rose-300 border border-rose-500/30 backdrop-blur-md -mt-2 shadow">
+          <div class="relative w-56 h-72 border-2 border-dashed border-[#F4A261] rounded-[50%] shadow-[0_0_25px_rgba(244,162,97,0.35)] flex items-center justify-center">
+            <div class="w-3 h-0.5 bg-[#F4A261]/60 absolute"></div>
+            <div class="h-3 w-0.5 bg-[#F4A261]/60 absolute"></div>
+            <span class="text-[10px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-black/80 text-[#F4A261] border border-[#F4A261]/40 backdrop-blur-md -mt-2 shadow">
               Oval Face Target
             </span>
           </div>
-          <p class="text-[10px] text-slate-200 bg-slate-900/80 px-3 py-1 rounded-full mt-3 backdrop-blur-md border border-slate-700/60 shadow">
+          <p class="text-[10px] text-white bg-black/70 px-3 py-1 rounded-full mt-3 backdrop-blur-md border border-white/20 shadow">
             Center your face with even front lighting
           </p>
         </div>
@@ -108,19 +107,19 @@
         <!-- Countdown Overlay -->
         <div
           v-if="countdown > 0"
-          class="absolute inset-0 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center z-20"
+          class="absolute inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center z-20"
         >
-          <span class="text-7xl font-bold text-rose-400 animate-ping">{{ countdown }}</span>
+          <span class="text-7xl font-bold text-[#F4A261] animate-ping">{{ countdown }}</span>
         </div>
 
         <!-- Camera Controls Overlay -->
-        <div class="absolute bottom-3 inset-x-0 flex items-center justify-center gap-3 z-10 px-4">
+        <div class="absolute bottom-3.5 inset-x-0 flex items-center justify-center gap-3 z-10 px-4">
           <template v-if="isStreaming && !capturedPhoto">
             <button
               type="button"
               @click="startCountdownCapture"
               :disabled="countdown > 0"
-              class="px-5 py-2.5 rounded-full bg-rose-500 hover:bg-rose-600 text-white font-medium shadow-lg shadow-rose-500/30 flex items-center gap-2 transition active:scale-95"
+              class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-6 py-2.5 shadow-md hover:opacity-95 transition-all flex items-center gap-2 active:scale-95"
             >
               <Aperture class="w-4 h-4" />
               <span>Capture Portrait</span>
@@ -128,7 +127,7 @@
             <button
               type="button"
               @click="stopCamera"
-              class="p-2.5 rounded-full bg-slate-800/90 hover:bg-slate-700 text-slate-300 transition"
+              class="p-2.5 rounded-xl bg-black/60 hover:bg-black/80 text-white backdrop-blur-md transition shadow"
               title="Stop Camera"
             >
               <PowerOff class="w-4 h-4" />
@@ -139,13 +138,13 @@
             <button
               type="button"
               @click="retakePhoto"
-              class="px-4 py-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center gap-1.5 transition"
+              class="px-4 py-2 rounded-xl bg-black/70 hover:bg-black/90 text-white text-xs font-semibold backdrop-blur-md flex items-center gap-1.5 transition shadow"
             >
               <RotateCcw class="w-3.5 h-3.5" />
               <span>Retake</span>
             </button>
-            <span class="text-xs text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-3 py-1 rounded-full flex items-center gap-1">
-              <Check class="w-3.5 h-3.5" />
+            <span class="text-xs text-emerald-800 bg-emerald-50 border border-emerald-300 px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 shadow">
+              <Check class="w-3.5 h-3.5 text-emerald-600" />
               <span>Portrait Locked</span>
             </span>
           </template>
@@ -154,7 +153,7 @@
             <button
               type="button"
               @click="startCamera"
-              class="px-5 py-2.5 rounded-full bg-rose-500 hover:bg-rose-600 text-white font-medium shadow-lg shadow-rose-500/30 flex items-center gap-2 transition"
+              class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-6 py-3 shadow-md hover:opacity-95 transition-all flex items-center gap-2"
             >
               <Camera class="w-4 h-4" />
               <span>Open Studio Webcam</span>
@@ -163,14 +162,14 @@
         </div>
 
         <!-- Camera Error Notice -->
-        <div v-if="cameraError" class="absolute inset-0 bg-slate-900/90 p-4 flex flex-col items-center justify-center text-center">
-          <AlertCircle class="w-8 h-8 text-amber-400 mb-2" />
-          <p class="text-sm font-medium text-slate-200 mb-1">{{ cameraError }}</p>
-          <p class="text-xs text-slate-400 mb-3">You can also upload a photo or select one of our studio models below</p>
+        <div v-if="cameraError" class="absolute inset-0 bg-[#2B2D42]/95 p-5 flex flex-col items-center justify-center text-center text-white">
+          <AlertCircle class="w-8 h-8 text-[#F4A261] mb-2" />
+          <p class="text-sm font-bold mb-1">{{ cameraError }}</p>
+          <p class="text-xs text-white/70 mb-3">You can also upload a photo or select one of our studio models below</p>
           <button
             type="button"
             @click="activeMode = 'samples'"
-            class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs text-rose-300 font-medium"
+            class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-xs text-[#F4A261] font-semibold border border-[#F4A261]/40"
           >
             Switch to Studio Models
           </button>
@@ -183,8 +182,8 @@
         @dragover.prevent="isDragging = true"
         @dragleave.prevent="isDragging = false"
         @drop.prevent="handleDrop"
-        class="w-full h-full p-4 flex flex-col items-center justify-center text-center cursor-pointer transition relative"
-        :class="isDragging ? 'bg-rose-500/10 border-2 border-dashed border-rose-400' : ''"
+        class="w-full h-full p-6 flex flex-col items-center justify-center text-center cursor-pointer transition relative bg-[#FDFBF7]"
+        :class="isDragging ? 'bg-[#E07A5F]/10 border-2 border-dashed border-[#E07A5F]' : ''"
         @click="triggerFileInput"
       >
         <input
@@ -196,15 +195,15 @@
         />
 
         <div v-if="uploadedPreview" class="w-full h-full relative">
-          <img :src="uploadedPreview" alt="Uploaded Portrait" class="w-full h-full object-cover rounded-lg" />
-          <div class="absolute bottom-2 inset-x-2 flex justify-between items-center bg-slate-900/80 backdrop-blur-sm p-2 rounded-lg text-xs">
-            <span class="text-emerald-400 font-medium flex items-center gap-1">
-              <Check class="w-3.5 h-3.5" /> Photo Loaded
+          <img :src="uploadedPreview" alt="Uploaded Portrait" class="w-full h-full object-cover rounded-xl" />
+          <div class="absolute bottom-3 inset-x-3 flex justify-between items-center bg-white/90 backdrop-blur-md p-2.5 rounded-xl text-xs shadow-md border border-[#F4F1DE]">
+            <span class="text-emerald-700 font-bold flex items-center gap-1.5">
+              <Check class="w-4 h-4 text-emerald-600" /> Photo Loaded
             </span>
             <button
               type="button"
               @click.stop="triggerFileInput"
-              class="text-rose-300 hover:text-white underline text-[11px]"
+              class="text-[#E07A5F] hover:underline font-semibold text-xs"
             >
               Change Photo
             </button>
@@ -212,16 +211,16 @@
         </div>
 
         <div v-else class="flex flex-col items-center gap-3">
-          <div class="w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
+          <div class="w-14 h-14 rounded-2xl bg-[#E07A5F]/15 border border-[#E07A5F]/30 flex items-center justify-center text-[#E07A5F]">
             <UploadCloud class="w-7 h-7" />
           </div>
           <div>
-            <p class="text-sm font-medium text-slate-200">Drag & drop your portrait here</p>
-            <p class="text-xs text-slate-400 mt-1">Supports PNG, JPG, WEBP (front-facing selfie works best)</p>
+            <p class="text-sm font-bold text-[#2B2D42]">Drag & drop your portrait here</p>
+            <p class="text-xs text-[#2B2D42]/60 mt-1">Supports PNG, JPG, WEBP (front-facing selfie works best)</p>
           </div>
           <button
             type="button"
-            class="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 border border-slate-700"
+            class="px-4 py-2 rounded-xl bg-white hover:bg-[#FDFBF7] text-xs font-semibold text-[#2B2D42] border border-[#F4F1DE] shadow-sm"
           >
             Browse Computer
           </button>
@@ -229,13 +228,13 @@
       </div>
 
       <!-- 3. STUDIO MODELS MODE -->
-      <div v-else-if="activeMode === 'samples'" class="w-full h-full p-3 flex flex-col justify-between">
-        <div class="relative w-full h-[70%] rounded-lg overflow-hidden bg-slate-950 border border-slate-800">
+      <div v-else-if="activeMode === 'samples'" class="w-full h-full p-3.5 flex flex-col justify-between bg-[#FDFBF7]">
+        <div class="relative w-full h-[70%] rounded-xl overflow-hidden bg-[#2B2D42] border border-[#F4F1DE] shadow-sm">
           <img :src="selectedModel?.imageUrl" :alt="selectedModel?.name" class="w-full h-full object-cover" />
-          <div class="absolute top-2 left-2 bg-slate-900/80 backdrop-blur-sm px-2.5 py-1 rounded text-[11px] font-medium text-rose-300 border border-slate-700">
+          <div class="absolute top-2 left-2 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-lg text-[11px] font-bold text-[#E07A5F] border border-[#F4F1DE] shadow-sm">
             {{ selectedModel?.name }}
           </div>
-          <div class="absolute bottom-2 inset-x-2 bg-slate-900/85 backdrop-blur-sm p-2 rounded text-[11px] text-slate-300 border border-slate-800">
+          <div class="absolute bottom-2 inset-x-2 bg-white/90 backdrop-blur-md p-2 rounded-lg text-[11px] text-[#2B2D42] border border-[#F4F1DE] shadow-sm font-medium">
             {{ selectedModel?.description }}
           </div>
         </div>
@@ -247,13 +246,13 @@
             :key="model.id"
             type="button"
             @click="chooseModel(model)"
-            class="p-1 rounded-lg border text-left transition flex flex-col items-center gap-1"
-            :class="selectedModel?.id === model.id ? 'border-rose-400 bg-rose-500/10' : 'border-slate-800 bg-slate-900/60 hover:border-slate-700'"
+            class="p-1 rounded-xl border text-left transition flex flex-col items-center gap-1 shadow-sm"
+            :class="selectedModel?.id === model.id ? 'border-[#E07A5F] bg-white ring-2 ring-[#E07A5F]/30' : 'border-[#F4F1DE] bg-white hover:border-[#E07A5F]/40'"
           >
-            <div class="w-8 h-8 rounded-full overflow-hidden border border-slate-700">
+            <div class="w-8 h-8 rounded-full overflow-hidden border border-[#F4F1DE]">
               <img :src="model.imageUrl" :alt="model.name" class="w-full h-full object-cover" />
             </div>
-            <span class="text-[10px] font-medium text-slate-300 truncate w-full text-center">
+            <span class="text-[10px] font-bold text-[#2B2D42] truncate w-full text-center">
               {{ model.name.split(' ')[0] }}
             </span>
           </button>

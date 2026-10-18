@@ -1,51 +1,49 @@
 <template>
-  <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-    <div class="relative w-full max-w-3xl max-h-[90vh] bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+  <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md">
+    <div class="relative w-full max-w-3xl max-h-[90vh] bg-white border border-[#F4F1DE] rounded-3xl shadow-2xl flex flex-col overflow-hidden text-[#2B2D42]">
       
       <!-- Modal Header -->
-      <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-gradient-to-r from-rose-950/40 via-purple-950/30 to-slate-900">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-500 via-rose-500 to-amber-400 p-0.5 shadow-lg shadow-purple-500/20">
-            <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-              <Bot class="w-5 h-5 text-rose-400" />
-            </div>
+      <div class="p-6 border-b border-[#F4F1DE] flex items-center justify-between bg-[#FDFBF7]">
+        <div class="flex items-center gap-3.5">
+          <div class="w-10 h-10 rounded-2xl bg-[#E07A5F]/15 border border-[#E07A5F]/20 flex items-center justify-center text-[#E07A5F]">
+            <Bot class="w-5 h-5" />
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <h3 class="text-lg font-bold text-white">Gemini 2.5 AI Stylist Consultation</h3>
-              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-semibold">
+              <h3 class="text-lg font-bold text-[#2B2D42]">Gemini 2.5 AI Stylist Consultation</h3>
+              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-[#F4F1DE] text-[#2B2D42] border border-[#E8E2CD] font-semibold">
                 Multimodal Vision
               </span>
             </div>
-            <p class="text-xs text-slate-400">Personalized facial geometry, skin tone analysis, and salon chemistry advice</p>
+            <p class="text-xs text-[#2B2D42]/60 mt-0.5">Personalized facial geometry, skin tone analysis, and salon chemistry advice</p>
           </div>
         </div>
 
         <button
           type="button"
           @click="$emit('close')"
-          class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+          class="p-2 rounded-xl text-[#2B2D42]/60 hover:text-[#2B2D42] hover:bg-[#F4F1DE] transition"
         >
           <X class="w-5 h-5" />
         </button>
       </div>
 
       <!-- Content Body -->
-      <div class="flex-1 overflow-y-auto p-5 space-y-5">
+      <div class="flex-1 overflow-y-auto p-6 space-y-5">
         
         <!-- Input Configuration Card -->
-        <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800 space-y-4">
+        <div class="bg-[#FDFBF7] p-5 rounded-2xl border border-[#F4F1DE] space-y-4">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             
             <!-- Model Selector -->
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                <Cpu class="w-3.5 h-3.5 text-purple-400" />
+              <label class="block text-xs font-bold text-[#2B2D42] mb-1.5 flex items-center gap-1.5">
+                <Cpu class="w-3.5 h-3.5 text-[#E07A5F]" />
                 <span>Google GenAI Model</span>
               </label>
               <select
                 v-model="selectedModel"
-                class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-rose-500 transition"
+                class="w-full bg-white border border-[#F4F1DE] rounded-xl px-3.5 py-2 text-xs text-[#2B2D42] focus:outline-none focus:border-[#E07A5F] shadow-sm font-semibold"
               >
                 <option value="gemini-2.5-flash">Gemini 2.5 Flash (Ultra-fast, Multimodal)</option>
                 <option value="gemini-2.5-pro">Gemini 2.5 Pro (Deep Complex Reasoning)</option>
@@ -54,31 +52,31 @@
 
             <!-- Target Vibe / Notes -->
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                <Sparkles class="w-3.5 h-3.5 text-amber-400" />
+              <label class="block text-xs font-bold text-[#2B2D42] mb-1.5 flex items-center gap-1.5">
+                <Sparkles class="w-3.5 h-3.5 text-[#F4A261]" />
                 <span>Your Style Preferences</span>
               </label>
               <input
                 v-model="userNotes"
                 type="text"
                 placeholder="e.g., Professional, low-maintenance, love warm tones..."
-                class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500 transition"
+                class="w-full bg-white border border-[#F4F1DE] rounded-xl px-3.5 py-2 text-xs text-[#2B2D42] placeholder-[#2B2D42]/40 focus:outline-none focus:border-[#E07A5F] shadow-sm font-medium"
               />
             </div>
           </div>
 
           <!-- Analyze Action Button -->
-          <div class="flex items-center justify-between pt-1">
-            <div class="text-[11px] text-slate-400 flex items-center gap-1.5">
-              <CheckCircle class="w-3.5 h-3.5 text-emerald-400" />
-              <span>Current selfie portrait will be analyzed by Gemini Vision</span>
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-1 border-t border-[#F4F1DE]">
+            <div class="text-[11px] text-[#2B2D42]/70 flex items-center gap-1.5">
+              <CheckCircle class="w-3.5 h-3.5 text-emerald-600" />
+              <span>Current portrait photo will be analyzed by Gemini Vision</span>
             </div>
 
             <button
               type="button"
               @click="runAnalysis"
               :disabled="isLoading"
-              class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-500 via-rose-500 to-amber-500 hover:from-purple-600 hover:to-amber-600 text-white text-xs font-bold shadow-lg shadow-rose-500/25 flex items-center gap-2 transition active:scale-95 disabled:opacity-50"
+              class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-5 py-2.5 text-xs shadow-md hover:opacity-95 transition-all flex items-center gap-2 active:scale-95 disabled:opacity-50"
             >
               <Loader2 v-if="isLoading" class="w-4 h-4 animate-spin" />
               <Wand2 v-else class="w-4 h-4" />
@@ -88,68 +86,34 @@
         </div>
 
         <!-- ANALYSIS RESULTS -->
-        <div v-if="analysisResult" class="space-y-4">
+        <div v-if="analysisResult" class="space-y-5">
           
           <!-- Key Diagnosis Badges -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
-              <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Face Shape</span>
-              <p class="text-sm font-bold text-rose-300 mt-0.5">{{ analysisResult.faceShape }}</p>
+            <div class="bg-[#FDFBF7] p-3.5 rounded-2xl border border-[#F4F1DE]">
+              <span class="text-[10px] uppercase font-bold text-[#2B2D42]/50 tracking-wider">Face Shape</span>
+              <p class="text-sm font-bold text-[#E07A5F] mt-0.5">{{ analysisResult.faceShape }}</p>
             </div>
-            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
-              <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Skin Undertone</span>
-              <p class="text-sm font-bold text-amber-300 mt-0.5">{{ analysisResult.skinUndertone }}</p>
+            <div class="bg-[#FDFBF7] p-3.5 rounded-2xl border border-[#F4F1DE]">
+              <span class="text-[10px] uppercase font-bold text-[#2B2D42]/50 tracking-wider">Skin Undertone</span>
+              <p class="text-sm font-bold text-[#F4A261] mt-0.5">{{ analysisResult.skinUndertone }}</p>
             </div>
-            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
-              <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Detected Base</span>
-              <p class="text-sm font-bold text-white mt-0.5">Level {{ analysisResult.detectedStartingLevel }}</p>
+            <div class="bg-[#FDFBF7] p-3.5 rounded-2xl border border-[#F4F1DE]">
+              <span class="text-[10px] uppercase font-bold text-[#2B2D42]/50 tracking-wider">Detected Base</span>
+              <p class="text-sm font-bold text-[#2B2D42] mt-0.5">Level {{ analysisResult.detectedStartingLevel }}</p>
             </div>
-            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
-              <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Bleach Needed</span>
-              <p class="text-sm font-bold mt-0.5" :class="analysisResult.chemicalFormulationGuidance?.requiresBleach ? 'text-rose-400' : 'text-emerald-400'">
+            <div class="bg-[#FDFBF7] p-3.5 rounded-2xl border border-[#F4F1DE]">
+              <span class="text-[10px] uppercase font-bold text-[#2B2D42]/50 tracking-wider">Bleach Needed</span>
+              <p class="text-sm font-bold mt-0.5" :class="analysisResult.chemicalFormulationGuidance?.requiresBleach ? 'text-[#E07A5F]' : 'text-emerald-700'">
                 {{ analysisResult.chemicalFormulationGuidance?.requiresBleach ? 'Yes (Decolorize)' : 'No (Direct Lift)' }}
               </p>
             </div>
           </div>
 
-          <!-- Recommended Hairstyles -->
-          <div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800">
-            <h4 class="text-xs font-bold text-white mb-3 flex items-center gap-2">
-              <Scissors class="w-4 h-4 text-rose-400" />
-              <span>AI Recommended Hairstyles for Your Face Shape</span>
-            </h4>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div
-                v-for="rec in analysisResult.recommendedHairstyles"
-                :key="rec.styleId"
-                class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex flex-col justify-between hover:border-slate-700 transition"
-              >
-                <div>
-                  <div class="flex items-center justify-between mb-1">
-                    <span class="text-xs font-bold text-slate-200">{{ rec.styleName }}</span>
-                    <span class="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-300">
-                      {{ rec.flatteryScore }}% Match
-                    </span>
-                  </div>
-                  <p class="text-[11px] text-slate-400 leading-relaxed mb-3">{{ rec.rationale }}</p>
-                </div>
-
-                <button
-                  type="button"
-                  @click="applyStyle(rec.styleId, rec.styleName)"
-                  class="w-full py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 rounded-lg text-xs font-semibold transition"
-                >
-                  Apply This Hairstyle
-                </button>
-              </div>
-            </div>
-          </div>
-
           <!-- Recommended Hair Colors -->
-          <div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800">
-            <h4 class="text-xs font-bold text-white mb-3 flex items-center gap-2">
-              <Palette class="w-4 h-4 text-amber-400" />
+          <div class="bg-[#FDFBF7] p-5 rounded-2xl border border-[#F4F1DE]">
+            <h4 class="text-xs font-bold text-[#2B2D42] mb-3 flex items-center gap-2">
+              <Palette class="w-4 h-4 text-[#E07A5F]" />
               <span>Harmonious Color Formulations for Your Undertone</span>
             </h4>
 
@@ -157,24 +121,24 @@
               <div
                 v-for="col in analysisResult.recommendedColors"
                 :key="col.colorName"
-                class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex flex-col justify-between hover:border-slate-700 transition"
+                class="bg-white border border-[#F4F1DE] rounded-xl p-3.5 flex flex-col justify-between hover:border-[#E07A5F]/40 transition shadow-sm"
               >
                 <div>
-                  <div class="flex items-center gap-2 mb-1.5">
+                  <div class="flex items-center gap-2.5 mb-2">
                     <div
-                      class="w-4 h-4 rounded-full border border-white/20 shadow-sm flex-shrink-0"
+                      class="w-5 h-5 rounded-lg border border-black/10 shadow-sm flex-shrink-0"
                       :style="{ backgroundColor: col.colorHex }"
                     ></div>
-                    <span class="text-xs font-bold text-slate-200 line-clamp-1">{{ col.colorName }}</span>
-                    <span class="text-[10px] font-mono text-slate-400">L{{ col.targetLevel }}</span>
+                    <span class="text-xs font-bold text-[#2B2D42] line-clamp-1">{{ col.colorName }}</span>
+                    <span class="text-[10px] font-mono text-[#2B2D42]/60">L{{ col.targetLevel }}</span>
                   </div>
-                  <p class="text-[11px] text-slate-400 leading-relaxed mb-3">{{ col.whyItFits }}</p>
+                  <p class="text-[11px] text-[#2B2D42]/70 leading-relaxed mb-3">{{ col.whyItFits }}</p>
                 </div>
 
                 <button
                   type="button"
                   @click="applyColor(col.colorHex, col.colorName, col.colorFamily)"
-                  class="w-full py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-lg text-xs font-semibold transition"
+                  class="w-full py-2 bg-[#FDFBF7] hover:bg-gradient-to-r hover:from-[#E07A5F] hover:to-[#F4A261] hover:text-white text-[#2B2D42] border border-[#F4F1DE] hover:border-transparent rounded-lg text-xs font-bold transition shadow-sm"
                 >
                   Apply This Shade
                 </button>
@@ -185,42 +149,43 @@
           <!-- Chemical Formulation & Care Tips -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Chemistry Guidance -->
-            <div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800">
-              <h5 class="text-xs font-bold text-white mb-2 flex items-center gap-2">
-                <FlaskConical class="w-4 h-4 text-rose-400" />
+            <div class="bg-[#FDFBF7] p-5 rounded-2xl border border-[#F4F1DE]">
+              <h5 class="text-xs font-bold text-[#2B2D42] mb-2 flex items-center gap-2">
+                <FlaskConical class="w-4 h-4 text-[#E07A5F]" />
                 <span>Gemini Chemical Advice</span>
               </h5>
               <div class="space-y-2 text-xs">
-                <p class="text-slate-300">
-                  <strong class="text-rose-300">Developer:</strong> {{ analysisResult.chemicalFormulationGuidance?.suggestedDeveloperVolume }} Vol Developer
+                <p class="text-[#2B2D42]">
+                  <strong class="text-[#E07A5F]">Developer:</strong> {{ analysisResult.chemicalFormulationGuidance?.suggestedDeveloperVolume }} Vol Developer
                 </p>
-                <p class="text-slate-400 text-[11px]">
+                <p class="text-[#2B2D42]/70 text-[11px] leading-relaxed">
                   {{ analysisResult.chemicalFormulationGuidance?.liftNotes }}
                 </p>
-                <p class="text-amber-300/90 text-[11px] bg-amber-950/30 p-2 rounded border border-amber-800/40">
-                  <strong>Porosity Caution:</strong> {{ analysisResult.chemicalFormulationGuidance?.porosityCaution }}
+                <p class="text-[#2B2D42] text-[11px] bg-white p-2.5 rounded-xl border border-[#F4F1DE]">
+                  <strong class="text-[#F4A261]">Porosity Caution:</strong> {{ analysisResult.chemicalFormulationGuidance?.porosityCaution }}
                 </p>
               </div>
             </div>
 
             <!-- At Home Care Tips -->
-            <div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800">
-              <h5 class="text-xs font-bold text-white mb-2 flex items-center gap-2">
-                <Sparkles class="w-4 h-4 text-emerald-400" />
+            <div class="bg-[#FDFBF7] p-5 rounded-2xl border border-[#F4F1DE]">
+              <h5 class="text-xs font-bold text-[#2B2D42] mb-2 flex items-center gap-2">
+                <Sparkles class="w-4 h-4 text-emerald-600" />
                 <span>At-Home Styling Maintenance</span>
               </h5>
-              <ul class="space-y-1.5 text-[11px] text-slate-300">
+              <ul class="space-y-2 text-[11px] text-[#2B2D42]/80">
                 <li
                   v-for="(tip, idx) in analysisResult.atHomeStylingTips"
                   :key="idx"
-                  class="flex items-start gap-1.5"
+                  class="flex items-start gap-2"
                 >
-                  <span class="text-emerald-400">&bull;</span>
-                  <span>{{ tip }}</span>
+                  <span class="text-emerald-600 font-bold">&bull;</span>
+                  <span class="leading-relaxed">{{ tip }}</span>
                 </li>
               </ul>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -237,7 +202,6 @@ import {
   CheckCircle,
   Wand2,
   Loader2,
-  Scissors,
   Palette,
   FlaskConical
 } from 'lucide-vue-next'
@@ -245,7 +209,7 @@ import type { AiStylistAnalysisResult } from '~/server/utils/gemini'
 
 const props = defineProps<{
   isOpen: boolean
-  userPhoto: string
+  userPhoto?: string
   currentHairLevel?: number
 }>()
 
@@ -263,7 +227,7 @@ const analysisResult = ref<AiStylistAnalysisResult | null>(null)
 async function runAnalysis() {
   isLoading.value = true
   try {
-    const res = await $fetch<{ success: boolean, data: AiStylistAnalysisResult }>('/api/ai/analyze-style', {
+    const res = await $fetch<{ success: boolean; data: AiStylistAnalysisResult }>('/api/ai/analyze-style', {
       method: 'POST',
       body: {
         imageBase64: props.userPhoto,
@@ -277,19 +241,14 @@ async function runAnalysis() {
       analysisResult.value = res.data
     }
   } catch (err) {
-    console.error('Failed to run Gemini analysis', err)
+    console.error('Gemini analysis failed', err)
   } finally {
     isLoading.value = false
   }
 }
 
-function applyStyle(styleId: string, styleName: string) {
-  emit('apply-style', styleId, styleName)
-  emit('close')
-}
-
-function applyColor(colorHex: string, colorName: string, colorFamily: string) {
-  emit('apply-color', colorHex, colorName, colorFamily)
+function applyColor(hex: string, name: string, family: string) {
+  emit('apply-color', hex, name, family)
   emit('close')
 }
 </script>

@@ -16,6 +16,18 @@ export default {
         serif: ['"Playfair Display"', 'serif'],
       },
       colors: {
+        brand: {
+          terracotta: '#E07A5F',
+          peach: '#F4A261',
+          charcoal: '#2B2D42',
+          ivory: '#FDFBF7',
+          cream: '#F4F1DE'
+        },
+        terracotta: '#E07A5F',
+        peach: '#F4A261',
+        charcoal: '#2B2D42',
+        ivory: '#FDFBF7',
+        cream: '#F4F1DE',
         salon: {
           50: '#fbf8f5',
           100: '#f5efe9',

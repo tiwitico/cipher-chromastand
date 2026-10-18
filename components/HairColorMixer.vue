@@ -1,69 +1,69 @@
 <template>
-  <div class="glass-card rounded-2xl p-5 border border-slate-800 shadow-xl">
+  <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#F4F1DE] shadow-xl text-[#2B2D42]">
     <!-- Header -->
-    <div class="flex items-center justify-between mb-4">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 border-b border-[#F4F1DE] pb-5">
       <div>
-        <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-          <Palette class="w-5 h-5 text-rose-400" />
+        <h3 class="text-lg font-bold text-[#2B2D42] flex items-center gap-2">
+          <Palette class="w-5 h-5 text-[#E07A5F]" />
           <span>Hair Color Simulation & Chemistry</span>
         </h3>
-        <p class="text-xs text-slate-400">Choose from salon-grade tones or formulate your custom shade</p>
+        <p class="text-xs text-[#2B2D42]/60 mt-0.5">Choose from salon-grade tones or formulate your custom shade</p>
       </div>
 
       <!-- Current Selected Color Chip -->
-      <div class="flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-800">
+      <div class="flex items-center gap-2.5 bg-[#FDFBF7] px-3.5 py-2 rounded-2xl border border-[#F4F1DE] shadow-sm">
         <div
-          class="w-5 h-5 rounded-full border border-white/20 shadow-inner"
+          class="w-6 h-6 rounded-full border border-black/10 shadow-sm"
           :style="{ backgroundColor: modelColor }"
         ></div>
         <div class="text-left">
-          <p class="text-xs font-bold text-slate-100 leading-tight">{{ currentColorName }}</p>
-          <p class="text-[10px] text-slate-400 font-mono">{{ modelColor.toUpperCase() }}</p>
+          <p class="text-xs font-bold text-[#2B2D42] leading-tight">{{ currentColorName }}</p>
+          <p class="text-[10px] text-[#2B2D42]/60 font-mono">{{ modelColor.toUpperCase() }}</p>
         </div>
       </div>
     </div>
 
     <!-- Color Techniques Tabs -->
-    <div class="grid grid-cols-4 gap-1.5 p-1 bg-slate-900/90 rounded-xl border border-slate-800 text-xs mb-4">
+    <div class="grid grid-cols-4 gap-1.5 p-1 bg-[#FDFBF7] rounded-2xl border border-[#F4F1DE] text-xs mb-6">
       <button
         v-for="tech in techniques"
         :key="tech.id"
         type="button"
         @click="selectedTechnique = tech.id"
-        class="py-1.5 px-2 rounded-lg font-medium transition text-center"
-        :class="selectedTechnique === tech.id ? 'bg-rose-500 text-white shadow-sm' : 'text-slate-400 hover:text-white'"
+        class="py-2 px-2.5 rounded-xl font-semibold transition text-center"
+        :class="selectedTechnique === tech.id ? 'bg-[#E07A5F] text-white shadow-sm' : 'text-[#2B2D42]/70 hover:text-[#2B2D42]'"
       >
         {{ tech.label }}
       </button>
     </div>
 
     <!-- Salon Color Swatches Grid -->
-    <div class="mb-4">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-xs font-semibold text-slate-300">Curated Salon Swatches</span>
-        <span class="text-[11px] text-slate-500">12 Expert Formulations</span>
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-xs font-bold text-[#2B2D42]">Curated Salon Swatches</span>
+        <span class="text-[11px] text-[#2B2D42]/60 font-medium">12 Expert Formulations</span>
       </div>
 
-      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2.5">
         <button
           v-for="color in presetColors"
           :key="color.id"
           type="button"
           @click="selectPresetColor(color)"
-          class="group p-2 rounded-xl border text-left transition flex flex-col items-center gap-1.5"
-          :class="modelColor.toLowerCase() === color.hex.toLowerCase() ? 'border-rose-400 bg-rose-500/10 shadow-[0_0_12px_rgba(244,63,94,0.2)]' : 'border-slate-800/80 bg-slate-900/50 hover:border-slate-700'"
+          class="group p-2.5 rounded-2xl border text-left transition flex flex-col items-center gap-1.5 shadow-sm"
+          :class="modelColor.toLowerCase() === color.hex.toLowerCase() ? 'border-[#E07A5F] bg-white ring-2 ring-[#E07A5F]/30 shadow' : 'border-[#F4F1DE] bg-[#FDFBF7] hover:border-[#E07A5F]/40'"
         >
-          <div class="relative w-8 h-8 rounded-full shadow-md border border-white/10 overflow-hidden flex items-center justify-center">
+          <div class="relative w-8 h-8 rounded-full shadow-sm border border-black/10 overflow-hidden flex items-center justify-center">
             <div class="w-full h-full" :style="{ backgroundColor: color.hex }"></div>
             <Check
               v-if="modelColor.toLowerCase() === color.hex.toLowerCase()"
               class="w-4 h-4 text-white drop-shadow absolute"
             />
           </div>
-          <span class="text-[11px] font-medium text-slate-200 truncate w-full text-center">
+          <span class="text-[11px] font-bold text-[#2B2D42] truncate w-full text-center">
             {{ color.name }}
           </span>
-          <span class="text-[9px] font-mono text-slate-400 -mt-1">
+          <span class="text-[10px] font-mono text-[#2B2D42]/60 -mt-0.5">
             Lvl {{ color.level }}
           </span>
         </button>
@@ -71,26 +71,26 @@
     </div>
 
     <!-- Custom Tone Adjusters & Sliders -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-800/80">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4 border-t border-[#F4F1DE]">
       
       <!-- Primary Custom Picker & Hex Input -->
       <div>
-        <label class="block text-xs font-medium text-slate-300 mb-1.5 flex items-center justify-between">
+        <label class="block text-xs font-bold text-[#2B2D42] mb-1.5 flex items-center justify-between">
           <span>Target Color (Hex / Picker)</span>
-          <span class="font-mono text-rose-300">{{ modelColor }}</span>
+          <span class="font-mono text-[#E07A5F]">{{ modelColor }}</span>
         </label>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2.5">
           <input
             type="color"
             v-model="modelColor"
-            class="w-10 h-10 rounded-lg cursor-pointer bg-slate-900 border border-slate-700 p-0.5"
+            class="w-11 h-11 rounded-xl cursor-pointer bg-white border border-[#F4F1DE] p-1 shadow-sm"
             @input="handleCustomColorInput"
           />
           <input
             type="text"
             v-model="modelColor"
             placeholder="#B8491A"
-            class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs font-mono text-slate-200 uppercase focus:outline-none focus:border-rose-500"
+            class="flex-1 bg-[#FDFBF7] border border-[#F4F1DE] rounded-xl px-3.5 py-2.5 text-xs font-mono text-[#2B2D42] uppercase focus:outline-none focus:border-[#E07A5F] shadow-sm font-semibold"
             @input="handleCustomColorInput"
           />
         </div>
@@ -98,21 +98,21 @@
 
       <!-- Secondary Color (For Balayage / Ombre / Highlights) -->
       <div v-if="selectedTechnique !== 'solid'">
-        <label class="block text-xs font-medium text-slate-300 mb-1.5 flex items-center justify-between">
+        <label class="block text-xs font-bold text-[#2B2D42] mb-1.5 flex items-center justify-between">
           <span>Secondary / Ends Tone</span>
-          <span class="font-mono text-amber-300">{{ secondaryColor }}</span>
+          <span class="font-mono text-[#F4A261]">{{ secondaryColor }}</span>
         </label>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2.5">
           <input
             type="color"
             v-model="secondaryColor"
-            class="w-10 h-10 rounded-lg cursor-pointer bg-slate-900 border border-slate-700 p-0.5"
+            class="w-11 h-11 rounded-xl cursor-pointer bg-white border border-[#F4F1DE] p-1 shadow-sm"
             @input="emitChange"
           />
           <input
             type="text"
             v-model="secondaryColor"
-            class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs font-mono text-slate-200 uppercase focus:outline-none focus:border-rose-500"
+            class="flex-1 bg-[#FDFBF7] border border-[#F4F1DE] rounded-xl px-3.5 py-2.5 text-xs font-mono text-[#2B2D42] uppercase focus:outline-none focus:border-[#E07A5F] shadow-sm font-semibold"
             @input="emitChange"
           />
         </div>
@@ -120,43 +120,43 @@
 
       <!-- Hair Gloss / Shine Slider -->
       <div>
-        <label class="block text-xs font-medium text-slate-300 mb-1 flex items-center justify-between">
+        <label class="block text-xs font-bold text-[#2B2D42] mb-1 flex items-center justify-between">
           <span class="flex items-center gap-1.5">
-            <Sparkles class="w-3.5 h-3.5 text-amber-400" />
+            <Sparkles class="w-3.5 h-3.5 text-[#F4A261]" />
             <span>Gloss & Specular Luster</span>
           </span>
-          <span class="font-mono text-amber-300">{{ glossLevel }}%</span>
+          <span class="font-mono text-[#F4A261]">{{ glossLevel }}%</span>
         </label>
         <input
           type="range"
           min="10"
           max="100"
           v-model.number="glossLevel"
-          class="w-full accent-rose-500 bg-slate-800 h-1.5 rounded-lg cursor-pointer"
+          class="w-full accent-[#E07A5F] bg-[#F4F1DE] h-2 rounded-lg cursor-pointer"
           @input="emitChange"
         />
-        <div class="flex justify-between text-[10px] text-slate-500 mt-0.5">
+        <div class="flex justify-between text-[10px] text-[#2B2D42]/60 mt-1">
           <span>Natural Matte</span>
-          <span>Satin</span>
+          <span>Satin Glow</span>
           <span>Glass Mirror</span>
         </div>
       </div>
 
       <!-- Shadow Root / Root Darkening -->
       <div>
-        <label class="block text-xs font-medium text-slate-300 mb-1 flex items-center justify-between">
+        <label class="block text-xs font-bold text-[#2B2D42] mb-1 flex items-center justify-between">
           <span>Root Depth / Shadow Root</span>
-          <span class="font-mono text-rose-300">{{ rootDepth }}%</span>
+          <span class="font-mono text-[#E07A5F]">{{ rootDepth }}%</span>
         </label>
         <input
           type="range"
           min="0"
           max="80"
           v-model.number="rootDepth"
-          class="w-full accent-rose-500 bg-slate-800 h-1.5 rounded-lg cursor-pointer"
+          class="w-full accent-[#E07A5F] bg-[#F4F1DE] h-2 rounded-lg cursor-pointer"
           @input="emitChange"
         />
-        <div class="flex justify-between text-[10px] text-slate-500 mt-0.5">
+        <div class="flex justify-between text-[10px] text-[#2B2D42]/60 mt-1">
           <span>Blended Soft Root</span>
           <span>Smudged</span>
           <span>Deep Root Melt</span>
@@ -197,20 +197,20 @@ const emit = defineEmits<{
   }): void
 }>()
 
-const techniques = [
-  { id: 'solid' as const, label: 'Solid Shade' },
-  { id: 'balayage' as const, label: 'Balayage Melt' },
-  { id: 'ombre' as const, label: 'Ombré Gradient' },
-  { id: 'highlights' as const, label: 'Sun Highlights' }
-]
-
-const selectedTechnique = ref<'solid' | 'balayage' | 'ombre' | 'highlights'>('balayage')
-const modelColor = ref(props.initialColorHex || '#87532B')
-const currentColorName = ref('Toasted Caramel Honey')
-const currentColorFamily = ref('warm_gold')
+const modelColor = ref(props.initialColorHex || '#B8491A')
 const secondaryColor = ref('#D1AC61')
+const currentColorName = ref('Fiery Irish Copper')
+const currentColorFamily = ref('copper')
+const selectedTechnique = ref<'solid' | 'balayage' | 'ombre' | 'highlights'>('balayage')
 const glossLevel = ref(75)
-const rootDepth = ref(30)
+const rootDepth = ref(25)
+
+const techniques = [
+  { id: 'balayage', label: 'Balayage' },
+  { id: 'solid', label: 'Solid All-Over' },
+  { id: 'ombre', label: 'Gradient Ombre' },
+  { id: 'highlights', label: 'Ribbon Highlights' }
+] as const
 
 const presetColors = ref<ColorPresetItem[]>([])
 
@@ -219,44 +219,43 @@ onMounted(async () => {
     const res = await $fetch<{ success: boolean, data: ColorPresetItem[] }>('/api/presets/colors')
     if (res.success && res.data) {
       presetColors.value = res.data
-      // Find matching or default
-      const match = presetColors.value.find(c => c.hex.toLowerCase() === modelColor.value.toLowerCase()) || presetColors.value[2]
-      if (match) {
-        selectPresetColor(match)
-      } else {
-        emitChange()
-      }
     }
   } catch (err) {
-    console.error('Failed to load preset colors', err)
-    emitChange()
+    // Fallback static preset colors
+    presetColors.value = [
+      { id: 'c_espresso', name: 'Midnight Espresso', category: 'Natural', hex: '#1C1514', level: 2, family: 'natural' },
+      { id: 'c_chestnut', name: 'Rich Chestnut', category: 'Natural', hex: '#442B21', level: 4, family: 'natural' },
+      { id: 'c_caramel', name: 'Caramel Honey', category: 'Warm', hex: '#87532B', level: 6, family: 'warm_gold' },
+      { id: 'c_copper', name: 'Fiery Irish Copper', category: 'Warm', hex: '#B8491A', level: 6, family: 'copper' },
+      { id: 'c_cherry', name: 'Bordeaux Cherry', category: 'Red', hex: '#7A1C2C', level: 4, family: 'red' },
+      { id: 'c_gold_blonde', name: 'Champagne Honey', category: 'Blonde', hex: '#D1AC61', level: 8, family: 'warm_gold' },
+      { id: 'c_ash_nordic', name: 'Nordic Ash', category: 'Ash', hex: '#B5A898', level: 8, family: 'ash' },
+      { id: 'c_platinum', name: 'Diamond Platinum', category: 'Silver', hex: '#EBE5DE', level: 10, family: 'silver' },
+      { id: 'c_rose_quartz', name: 'Dusty Rose Quartz', category: 'Fashion', hex: '#C67B7A', level: 8, family: 'fashion' },
+      { id: 'c_lavender', name: 'Smoked Lavender', category: 'Fashion', hex: '#8F82A8', level: 9, family: 'fashion' },
+      { id: 'c_emerald', name: 'Midnight Emerald', category: 'Fashion', hex: '#16483C', level: 3, family: 'fashion' },
+      { id: 'c_sapphire', name: 'Royal Sapphire', category: 'Fashion', hex: '#17274E', level: 2, family: 'fashion' }
+    ]
   }
-})
-
-watch(selectedTechnique, () => {
   emitChange()
 })
 
-function selectPresetColor(preset: ColorPresetItem) {
-  modelColor.value = preset.hex
-  currentColorName.value = preset.name
-  currentColorFamily.value = preset.family
-
-  // Auto-set complementary secondary tone for dimension
-  if (preset.level <= 4) {
-    secondaryColor.value = '#87532B' // caramel lift
-  } else if (preset.level <= 7) {
-    secondaryColor.value = '#D1AC61' // honey gold
-  } else {
-    secondaryColor.value = '#EBE5DE' // platinum shine
+watch(() => props.initialColorHex, (newHex) => {
+  if (newHex && newHex !== modelColor.value) {
+    modelColor.value = newHex
   }
+})
 
+function selectPresetColor(color: ColorPresetItem) {
+  modelColor.value = color.hex
+  currentColorName.value = color.name
+  currentColorFamily.value = color.family
   emitChange()
 }
 
 function handleCustomColorInput() {
-  currentColorName.value = 'Custom Formulated Tone'
-  currentColorFamily.value = 'natural'
+  currentColorName.value = 'Custom Shade'
+  currentColorFamily.value = 'custom'
   emitChange()
 }
 
