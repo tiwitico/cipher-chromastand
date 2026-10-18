@@ -20,7 +20,7 @@
                 Chromastand AI
               </span>
             </div>
-            <p class="text-[11px] text-[#2B2D42]/60 hidden sm:block">Precision Hair Simulation & Salon Chemistry Formulation</p>
+            <p class="text-[11px] text-[#2B2D42]/60 hidden sm:block">AI Precision Hair Simulation & Salon Chemistry Suite</p>
           </div>
         </div>
 
@@ -28,26 +28,29 @@
         <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-[#2B2D42]/70">
           <a href="#features" class="hover:text-[#E07A5F] transition">Why Us vs Filters</a>
           <a href="#how-it-works" class="hover:text-[#E07A5F] transition">How It Works</a>
+          <a href="#experience-selector" class="hover:text-[#E07A5F] transition">Choose Experience</a>
           <a href="#for-salons" class="hover:text-[#E07A5F] transition">For Salons & Colorists</a>
-          <button
-            type="button"
-            @click="isAiModalOpen = true"
-            class="hover:text-[#E07A5F] transition flex items-center gap-1.5"
-          >
-            <Bot class="w-3.5 h-3.5 text-[#E07A5F]" />
-            <span>AI Colorist Chat</span>
-          </button>
         </nav>
 
         <!-- Actions -->
         <div class="flex items-center gap-2.5">
+          <!-- AI Color Match Link -->
+          <NuxtLink
+            to="/recommendation"
+            class="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F4F1DE] border border-[#F4F1DE] text-xs font-bold text-[#2B2D42] hidden sm:flex items-center gap-1.5 shadow-sm transition"
+          >
+            <Sparkles class="w-3.5 h-3.5 text-[#F4A261]" />
+            <span>AI Color Match</span>
+          </NuxtLink>
+
+          <!-- Saved Formulas -->
           <button
             type="button"
             @click="isGalleryOpen = true"
             class="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F4F1DE] border border-[#F4F1DE] text-xs font-bold text-[#2B2D42] flex items-center gap-2 shadow-sm transition"
           >
             <BookmarkCheck class="w-4 h-4 text-[#E07A5F]" />
-            <span class="hidden sm:inline">Saved Formulas</span>
+            <span class="hidden sm:inline">Saved</span>
             <span
               v-if="savedCount > 0"
               class="px-1.5 py-0.2 rounded-full text-[10px] bg-[#E07A5F]/15 text-[#E07A5F] font-mono font-bold"
@@ -56,14 +59,14 @@
             </span>
           </button>
 
-          <button
-            type="button"
-            @click="scrollToSimulator"
-            class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-5 py-2.5 text-xs shadow-md hover:opacity-95 transition-all flex items-center gap-1.5 active:scale-95"
+          <!-- Start Simulator Button -->
+          <NuxtLink
+            to="/simulator"
+            class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-4 sm:px-5 py-2 text-xs shadow-md hover:opacity-95 transition-all flex items-center gap-1.5 active:scale-95"
           >
-            <span>Simulate Your Look Now</span>
+            <span>Launch Simulator</span>
             <ArrowRight class="w-3.5 h-3.5" />
-          </button>
+          </NuxtLink>
         </div>
       </div>
     </header>
@@ -89,22 +92,23 @@
 
           <!-- CTAs -->
           <div class="flex flex-wrap items-center gap-4 pt-2">
-            <!-- Primary Action Button -->
-            <button
-              type="button"
-              @click="scrollToSimulator"
-              class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-6 py-3 shadow-md hover:opacity-95 transition-all flex items-center gap-2 text-sm active:scale-95"
+            <!-- AI Recommendation Wizard CTA -->
+            <NuxtLink
+              to="/recommendation"
+              class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-6 py-3.5 shadow-md hover:opacity-95 transition-all flex items-center gap-2 text-sm active:scale-95"
             >
-              <span>Find My Flawless Shade (Free)</span>
+              <span>Find My Flawless Shade (AI Match)</span>
               <ArrowRight class="w-4 h-4" />
-            </button>
+            </NuxtLink>
 
-            <a
-              href="#features"
-              class="px-5 py-3 rounded-xl bg-white hover:bg-[#F4F1DE] text-[#2B2D42] text-sm font-semibold border border-[#F4F1DE] shadow-sm transition"
+            <!-- Simulator Studio CTA -->
+            <NuxtLink
+              to="/simulator"
+              class="px-5 py-3.5 rounded-xl bg-white hover:bg-[#F4F1DE] text-[#2B2D42] text-sm font-semibold border border-[#F4F1DE] shadow-sm transition flex items-center gap-2"
             >
-              Why Filters Fail vs AuraHair &rarr;
-            </a>
+              <SlidersHorizontal class="w-4 h-4 text-[#E07A5F]" />
+              <span>Direct Hair Simulator &rarr;</span>
+            </NuxtLink>
           </div>
 
           <!-- Trust & Value Badges -->
@@ -130,7 +134,7 @@
             <!-- Floating Pill -->
             <div class="absolute -top-3.5 right-6 bg-[#2B2D42] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>Live Colorist Match</span>
+              <span>Live Colorist Engine</span>
             </div>
 
             <!-- Before/After Split Card Preview -->
@@ -170,6 +174,115 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- CHOOSE YOUR EXPERIENCE (WIZARD SELECTOR SECTION) -->
+    <section id="experience-selector" class="py-20 border-b border-[#F4F1DE] bg-gradient-to-b from-[#FDFBF7] to-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+          <span class="text-xs uppercase font-extrabold tracking-wider text-[#E07A5F] bg-[#E07A5F]/10 px-3.5 py-1 rounded-full">
+            Two Tailored Wizard Experiences
+          </span>
+          <h2 class="text-3xl font-extrabold text-[#2B2D42] tracking-tight">
+            How Would You Like to Start?
+          </h2>
+          <p class="text-sm text-[#2B2D42]/70 leading-relaxed">
+            Choose between automated AI color consultation or hands-on manual color simulation.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          
+          <!-- Card 1: AI Color Recommendation Wizard -->
+          <div class="bg-white rounded-3xl p-8 border border-[#F4F1DE] shadow-xl hover:shadow-2xl transition flex flex-col justify-between space-y-6 relative overflow-hidden group">
+            <div class="absolute top-0 right-0 w-36 h-36 bg-gradient-to-bl from-[#E07A5F]/15 to-transparent rounded-bl-full pointer-events-none"></div>
+
+            <div class="space-y-4">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E07A5F]/10 text-[#E07A5F] text-xs font-bold border border-[#E07A5F]/20">
+                <Sparkles class="w-3.5 h-3.5" />
+                <span>Smart Chromatic Analysis</span>
+              </div>
+
+              <h3 class="text-2xl font-extrabold text-[#2B2D42]">
+                AI Color Recommendation Wizard
+              </h3>
+
+              <p class="text-xs sm:text-sm text-[#2B2D42]/75 leading-relaxed">
+                Take a selfie or use our models. Google Gemini 2.5 measures your facial dermis ($L^*a^*b^*$), iris chroma, and contrast to curate 3 scientifically flattering shades with instant 1-click simulation.
+              </p>
+
+              <!-- Feature Bullets -->
+              <div class="space-y-2.5 pt-2 text-xs text-[#2B2D42]/80 font-medium">
+                <div class="flex items-center gap-2.5">
+                  <CheckCircle class="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <span>Dermis undertone & eye iris chroma reading</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <CheckCircle class="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <span>12-season matrix (Analogous, Complementary & Fashion)</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <CheckCircle class="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <span>1-click transition to mirror simulation</span>
+                </div>
+              </div>
+            </div>
+
+            <NuxtLink
+              to="/recommendation"
+              class="w-full bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-6 py-3.5 shadow-md hover:opacity-95 transition-all flex items-center justify-center gap-2 text-sm active:scale-95"
+            >
+              <span>Start AI Color Wizard</span>
+              <ArrowRight class="w-4 h-4" />
+            </NuxtLink>
+          </div>
+
+          <!-- Card 2: Direct Hair Simulator Studio -->
+          <div class="bg-white rounded-3xl p-8 border border-[#F4F1DE] shadow-xl hover:shadow-2xl transition flex flex-col justify-between space-y-6 relative overflow-hidden group">
+            <div class="absolute top-0 right-0 w-36 h-36 bg-gradient-to-bl from-[#F4A261]/20 to-transparent rounded-bl-full pointer-events-none"></div>
+
+            <div class="space-y-4">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F4A261]/20 text-[#2B2D42] text-xs font-bold border border-[#F4A261]/30">
+                <SlidersHorizontal class="w-3.5 h-3.5 text-[#E07A5F]" />
+                <span>Precision Color Lab</span>
+              </div>
+
+              <h3 class="text-2xl font-extrabold text-[#2B2D42]">
+                Hair Simulator & Chemistry Lab
+              </h3>
+
+              <p class="text-xs sm:text-sm text-[#2B2D42]/75 leading-relaxed">
+                Already know what color you want? Pick from curated shades, dial in custom hex pigments, adjust root depth and balayage techniques, and generate printable salon work orders.
+              </p>
+
+              <!-- Feature Bullets -->
+              <div class="space-y-2.5 pt-2 text-xs text-[#2B2D42]/80 font-medium">
+                <div class="flex items-center gap-2.5">
+                  <CheckCircle class="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <span>Interactive side-by-side & before/after wipe mirror</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <CheckCircle class="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <span>Real specular highlights & cuticle sheen retention</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <CheckCircle class="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <span>PDF work order export & WhatsApp stylist sharing</span>
+                </div>
+              </div>
+            </div>
+
+            <NuxtLink
+              to="/simulator"
+              class="w-full bg-[#2B2D42] hover:bg-[#3A3D5A] text-white font-medium rounded-xl px-6 py-3.5 shadow-md transition-all flex items-center justify-center gap-2 text-sm active:scale-95"
+            >
+              <span>Launch Simulator Wizard</span>
+              <ArrowRight class="w-4 h-4" />
+            </NuxtLink>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -277,282 +390,6 @@
       </div>
     </section>
 
-    <!-- STEP-BY-STEP INTERACTIVE SIMULATOR WORKSPACE -->
-    <section id="simulation-workspace" class="py-12 flex-1">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-8">
-        
-        <!-- Stepper Navigation -->
-        <div class="bg-white p-3 rounded-2xl border border-[#F4F1DE] shadow-sm">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-            <!-- Step 1 -->
-            <button
-              type="button"
-              @click="currentStep = 1"
-              class="flex items-center gap-3 p-3 rounded-xl border text-left transition"
-              :class="currentStep === 1 ? 'border-[#E07A5F] bg-[#E07A5F]/10 text-[#2B2D42]' : 'border-transparent hover:bg-[#FDFBF7] text-[#2B2D42]/60'"
-            >
-              <div
-                class="w-8 h-8 rounded-xl flex items-center justify-center font-bold text-xs"
-                :class="currentStep === 1 ? 'bg-[#E07A5F] text-white shadow-sm' : 'bg-[#F4F1DE] text-[#2B2D42]'"
-              >
-                1
-              </div>
-              <div class="overflow-hidden">
-                <span class="text-xs font-bold block truncate">1. Baseline Canvas</span>
-                <span class="text-[10px] text-[#2B2D42]/60 block truncate">Auto-read Level {{ currentBaseLevel }}</span>
-              </div>
-            </button>
-
-            <!-- Step 2 -->
-            <button
-              type="button"
-              @click="currentStep = 2"
-              class="flex items-center gap-3 p-3 rounded-xl border text-left transition"
-              :class="currentStep === 2 ? 'border-[#E07A5F] bg-[#E07A5F]/10 text-[#2B2D42]' : 'border-transparent hover:bg-[#FDFBF7] text-[#2B2D42]/60'"
-            >
-              <div
-                class="w-8 h-8 rounded-xl flex items-center justify-center font-bold text-xs"
-                :class="currentStep === 2 ? 'bg-[#E07A5F] text-white shadow-sm' : 'bg-[#F4F1DE] text-[#2B2D42]'"
-              >
-                2
-              </div>
-              <div class="overflow-hidden">
-                <span class="text-xs font-bold block truncate">2. Harmonic Shade</span>
-                <span class="text-[10px] text-[#2B2D42]/60 block truncate">{{ currentColorName }}</span>
-              </div>
-            </button>
-
-            <!-- Step 3 -->
-            <button
-              type="button"
-              @click="currentStep = 3"
-              class="flex items-center gap-3 p-3 rounded-xl border text-left transition"
-              :class="currentStep === 3 ? 'border-[#E07A5F] bg-[#E07A5F]/10 text-[#2B2D42]' : 'border-transparent hover:bg-[#FDFBF7] text-[#2B2D42]/60'"
-            >
-              <div
-                class="w-8 h-8 rounded-xl flex items-center justify-center font-bold text-xs"
-                :class="currentStep === 3 ? 'bg-[#E07A5F] text-white shadow-sm' : 'bg-[#F4F1DE] text-[#2B2D42]'"
-              >
-                3
-              </div>
-              <div class="overflow-hidden">
-                <span class="text-xs font-bold block truncate">3. True Mirror Split</span>
-                <span class="text-[10px] text-[#2B2D42]/60 block truncate">Before / After Review</span>
-              </div>
-            </button>
-
-            <!-- Step 4 -->
-            <button
-              type="button"
-              @click="currentStep = 4"
-              class="flex items-center gap-3 p-3 rounded-xl border text-left transition"
-              :class="currentStep === 4 ? 'border-[#E07A5F] bg-[#E07A5F]/10 text-[#2B2D42]' : 'border-transparent hover:bg-[#FDFBF7] text-[#2B2D42]/60'"
-            >
-              <div
-                class="w-8 h-8 rounded-xl flex items-center justify-center font-bold text-xs"
-                :class="currentStep === 4 ? 'bg-[#E07A5F] text-white shadow-sm' : 'bg-[#F4F1DE] text-[#2B2D42]'"
-              >
-                4
-              </div>
-              <div class="overflow-hidden">
-                <span class="text-xs font-bold block truncate">4. Salon Work Order</span>
-                <span class="text-[10px] text-[#2B2D42]/60 block truncate">PDF & WhatsApp Recipe</span>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        <!-- STEP 1: PHOTO INPUT & BASE CANVAS -->
-        <div v-show="currentStep === 1" class="space-y-6">
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-            <div class="md:col-span-6">
-              <CameraCapture
-                @photo-selected="handlePhotoSelected"
-              />
-            </div>
-
-            <div class="md:col-span-6 space-y-4">
-              <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#F4F1DE] shadow-xl space-y-5">
-                <div class="flex items-center gap-3.5">
-                  <div class="w-12 h-12 rounded-2xl bg-[#E07A5F]/15 border border-[#E07A5F]/20 flex items-center justify-center text-[#E07A5F]">
-                    <User class="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 class="text-lg font-bold text-[#2B2D42]">Step 1: Your Baseline Canvas</h3>
-                    <p class="text-xs text-[#2B2D42]/60 mt-0.5">Lighting calibration and skin protection ensure streak-free, predictable color</p>
-                  </div>
-                </div>
-
-                <!-- Detected Base Info -->
-                <div class="bg-[#FDFBF7] p-5 rounded-2xl border border-[#F4F1DE] space-y-3.5">
-                  <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-[#2B2D42]">Detected Hair Level:</span>
-                    <span class="text-xs font-bold text-[#E07A5F]">Level {{ currentBaseLevel }}</span>
-                  </div>
-                  <div class="flex items-center justify-between text-xs text-[#2B2D42]/70">
-                    <span>Dominant Tone:</span>
-                    <span class="font-semibold text-[#2B2D42]">{{ currentHairTone }}</span>
-                  </div>
-                  <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-center gap-2.5">
-                    <CheckCircle class="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                    <span>Facial skin, eyes, and background are protected from dye tint.</span>
-                  </div>
-                </div>
-
-                <!-- Step Navigation Action -->
-                <div class="pt-2 flex justify-end">
-                  <button
-                    type="button"
-                    @click="currentStep = 2"
-                    class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-6 py-3 shadow-md hover:opacity-95 transition-all text-xs flex items-center gap-2 active:scale-95"
-                  >
-                    <span>Next: Target Color & Recommendations &rarr;</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- GEMINI CHROMATIC INTELLIGENCE & COLOR THEORY CARD -->
-          <ChromaticColorTheoryCard
-            :user-photo="currentPhoto"
-            :current-hair-level="currentBaseLevel"
-            @apply-color="handleApplyRecommendedColor"
-          />
-        </div>
-
-        <!-- STEP 2: CHOOSE TARGET COLOR OR VIEW RECOMMENDATIONS -->
-        <div v-show="currentStep === 2" class="space-y-6">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            <div class="lg:col-span-7">
-              <HairColorMixer
-                :initial-color-hex="currentColorHex"
-                @color-change="handleColorChange"
-              />
-            </div>
-
-            <div class="lg:col-span-5 space-y-4">
-              <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#F4F1DE] shadow-xl space-y-5">
-                <h3 class="text-lg font-bold text-[#2B2D42] flex items-center gap-2">
-                  <Sparkles class="w-5 h-5 text-[#F4A261]" />
-                  <span>Selected Formulation</span>
-                </h3>
-
-                <div class="bg-[#FDFBF7] p-5 rounded-2xl border border-[#F4F1DE] space-y-4">
-                  <div class="flex items-center gap-3.5">
-                    <div
-                      class="w-12 h-12 rounded-2xl border border-black/10 shadow-md flex-shrink-0"
-                      :style="{ backgroundColor: currentColorHex }"
-                    ></div>
-                    <div>
-                      <h4 class="text-sm font-bold text-[#2B2D42]">{{ currentColorName }}</h4>
-                      <p class="text-xs font-mono text-[#2B2D42]/60 mt-0.5">{{ currentColorHex }} &bull; {{ currentColorTechnique }}</p>
-                    </div>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-3 pt-3 border-t border-[#F4F1DE] text-xs">
-                    <div>
-                      <span class="text-[#2B2D42]/50 block text-[10px] font-bold uppercase">Gloss / Shine</span>
-                      <span class="font-bold text-[#F4A261]">{{ currentGloss }}% Mirror</span>
-                    </div>
-                    <div>
-                      <span class="text-[#2B2D42]/50 block text-[10px] font-bold uppercase">Root Shadow</span>
-                      <span class="font-bold text-[#E07A5F]">{{ currentRootDepth }}% Blend</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Navigation -->
-                <div class="flex items-center justify-between pt-2">
-                  <button
-                    type="button"
-                    @click="currentStep = 1"
-                    class="px-4 py-2.5 bg-white hover:bg-[#FDFBF7] text-[#2B2D42] rounded-xl text-xs font-semibold border border-[#F4F1DE] transition"
-                  >
-                    &larr; Back to Photo
-                  </button>
-                  <button
-                    type="button"
-                    @click="currentStep = 3"
-                    class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-6 py-3 shadow-md hover:opacity-95 transition-all text-xs flex items-center gap-2 active:scale-95"
-                  >
-                    <span>Next: View Result &rarr;</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 3: REALISTIC RESULT PREVIEW (SIDE-BY-SIDE) -->
-        <div v-show="currentStep === 3" class="space-y-6">
-          <HairSimulatorCanvas
-            ref="simulatorRef"
-            :user-photo="currentPhoto"
-            :color-hex="currentColorHex"
-            :color-name="currentColorName"
-            :color-family="currentColorFamily"
-            :secondary-hex="currentSecondaryHex"
-            :color-type="currentColorTechnique"
-            :gloss="currentGloss"
-            :root-darkness="currentRootDepth"
-            :current-level-override="levelOverride"
-            @processed="handleProcessed"
-          />
-
-          <div class="flex items-center justify-between pt-2">
-            <button
-              type="button"
-              @click="currentStep = 2"
-              class="px-5 py-2.5 bg-white hover:bg-[#FDFBF7] text-[#2B2D42] rounded-xl text-xs font-semibold border border-[#F4F1DE] transition"
-            >
-              &larr; Adjust Color
-            </button>
-            <button
-              type="button"
-              @click="currentStep = 4"
-              class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-6 py-3 shadow-md hover:opacity-95 transition-all text-xs flex items-center gap-2 active:scale-95"
-            >
-              <span>Next: Formula, PDF & Share &rarr;</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- STEP 4: SALON CHEMICAL FORMULATION & EXPORT -->
-        <div v-show="currentStep === 4" class="space-y-6">
-          <SalonFormulaCard
-            :target-hex="currentColorHex"
-            :color-name="currentColorName"
-            :color-family="currentColorFamily"
-            :user-photo="currentPhoto"
-            :formula="processResult?.formula ?? null"
-            :detected-level="processResult?.currentColor.level"
-            :get-transformed-snapshot="getTransformedSnapshot"
-            @override-level="levelOverride = $event"
-            @simulation-saved="handleSimulationSaved"
-          />
-
-          <div class="flex items-center justify-between pt-2">
-            <button
-              type="button"
-              @click="currentStep = 3"
-              class="px-5 py-2.5 bg-white hover:bg-[#FDFBF7] text-[#2B2D42] rounded-xl text-xs font-semibold border border-[#F4F1DE] transition"
-            >
-              &larr; Back to Side-by-Side Preview
-            </button>
-            <button
-              type="button"
-              @click="currentStep = 1"
-              class="px-5 py-2.5 bg-white hover:bg-[#FDFBF7] text-[#E07A5F] rounded-xl text-xs font-bold border border-[#F4F1DE] transition"
-            >
-              Try Another Selfie
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
     <!-- B2B & SALON SUITE SECTION -->
     <section id="for-salons" class="py-20 border-b border-[#F4F1DE] bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
@@ -642,23 +479,21 @@
           </p>
 
           <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <button
-              type="button"
-              @click="scrollToSimulator"
+            <NuxtLink
+              to="/recommendation"
               class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-7 py-3.5 shadow-lg hover:opacity-95 transition-all flex items-center gap-2 text-sm active:scale-95"
             >
-              <span>Simulate Your Look Now (Free)</span>
+              <span>Start AI Color Match (Free)</span>
               <ArrowRight class="w-4 h-4" />
-            </button>
+            </NuxtLink>
 
-            <button
-              type="button"
-              @click="isGalleryOpen = true"
+            <NuxtLink
+              to="/simulator"
               class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-sm font-semibold border border-white/20 transition flex items-center gap-2"
             >
-              <BookmarkCheck class="w-4 h-4 text-[#F4A261]" />
-              <span>Browse Saved Looks</span>
-            </button>
+              <SlidersHorizontal class="w-4 h-4 text-[#F4A261]" />
+              <span>Direct Hair Simulator</span>
+            </NuxtLink>
           </div>
 
           <div class="pt-6 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 text-xs text-white/60">
@@ -690,22 +525,13 @@
       </div>
     </footer>
 
-    <!-- GEMINI 2.5 AI COLORIST MODAL -->
-    <GeminiStylistModal
-      :is-open="isAiModalOpen"
-      :user-photo="currentPhoto"
-      :current-hair-level="currentBaseLevel"
-      @close="isAiModalOpen = false"
-      @apply-style="handleApplyAiStyle"
-      @apply-color="handleApplyAiColor"
-    />
-
     <!-- SAVED GALLERY MODAL -->
     <SavedGalleryModal
       :is-open="isGalleryOpen"
       @close="isGalleryOpen = false"
       @load-look="handleLoadLook"
     />
+
   </div>
 </template>
 
@@ -714,8 +540,6 @@ import { ref, onMounted } from 'vue'
 import {
   Sparkles,
   BookmarkCheck,
-  Bot,
-  User,
   CheckCircle,
   Eye,
   Beaker,
@@ -723,120 +547,37 @@ import {
   ArrowRight,
   ShieldCheck,
   TrendingUp,
-  Clock
+  Clock,
+  SlidersHorizontal
 } from 'lucide-vue-next'
-import { SAMPLE_MODELS } from '~/utils/sampleModels'
-import type { HairProcessResult } from '~/components/HairSimulatorCanvas.vue'
+import { useHairSession } from '~/composables/useHairSession'
 
-const currentStep = ref(1) // Step 1, 2, 3, or 4
+const router = useRouter()
 const isGalleryOpen = ref(false)
-const isAiModalOpen = ref(false)
-const savedCount = ref(0)
-const simulatorRef = ref<any>(null)
 
-// Current Working State
-const currentPhoto = ref<string>(SAMPLE_MODELS[0].imageUrl)
-const currentBaseLevel = ref<number>(4)
-const currentHairTone = ref<string>('Reading hair...')
-const processResult = ref<HairProcessResult | null>(null)
-const levelOverride = ref<number | null>(null)
-
-const currentColorHex = ref('#B8491A')
-const currentColorName = ref('Fiery Irish Copper')
-const currentColorFamily = ref('copper')
-const currentSecondaryHex = ref('#D1AC61')
-const currentColorTechnique = ref<'solid' | 'balayage' | 'ombre' | 'highlights'>('balayage')
-const currentGloss = ref(75)
-const currentRootDepth = ref(25)
+const {
+  savedCount,
+  fetchSavedCount,
+  setPhoto,
+  setColor
+} = useHairSession()
 
 onMounted(async () => {
   await fetchSavedCount()
 })
 
-function scrollToSimulator() {
-  currentStep.value = 1
-  const el = document.getElementById('simulation-workspace')
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth' })
-  }
-}
-
-async function fetchSavedCount() {
-  try {
-    const res = await $fetch<{ success: boolean, data: any[] }>('/api/simulations')
-    if (res.success && res.data) {
-      savedCount.value = res.data.length
-    }
-  } catch (err) {
-    // Ignore error on first boot
-  }
-}
-
-function handlePhotoSelected(photoUrl: string) {
-  currentPhoto.value = photoUrl
-  levelOverride.value = null
-  processResult.value = null
-}
-
-function handleColorChange(data: {
-  colorHex: string
-  colorName: string
-  colorFamily: string
-  secondaryHex: string
-  technique: 'solid' | 'balayage' | 'ombre' | 'highlights'
-  gloss: number
-  rootDepth: number
-}) {
-  currentColorHex.value = data.colorHex
-  currentColorName.value = data.colorName
-  currentColorFamily.value = data.colorFamily
-  currentSecondaryHex.value = data.secondaryHex
-  currentColorTechnique.value = data.technique
-  currentGloss.value = data.gloss
-  currentRootDepth.value = data.rootDepth
-}
-
-function getTransformedSnapshot() {
-  return simulatorRef.value?.getTransformedDataUrl ? simulatorRef.value.getTransformedDataUrl() : ''
-}
-
-function handleSimulationSaved(id: string) {
-  savedCount.value++
-}
-
 function handleLoadLook(item: any) {
-  if (item.user_photo) currentPhoto.value = item.user_photo
-  currentColorHex.value = item.color_hex
-  currentColorName.value = item.color_name
-  currentColorFamily.value = item.color_family || 'natural'
-  if (item.secondary_color_hex) currentSecondaryHex.value = item.secondary_color_hex
-  currentStep.value = 3
-  scrollToSimulator()
-}
-
-function handleApplyAiStyle(styleId: string, styleName: string) {
-  // Focus on color
-}
-
-function handleApplyAiColor(colorHex: string, colorName: string, colorFamily: string) {
-  currentColorHex.value = colorHex
-  currentColorName.value = colorName
-  currentColorFamily.value = colorFamily
-  currentStep.value = 3 // Jump directly to preview
-  scrollToSimulator()
-}
-
-function handleApplyRecommendedColor(colorHex: string, colorName: string, colorFamily: string) {
-  currentColorHex.value = colorHex
-  currentColorName.value = colorName
-  currentColorFamily.value = colorFamily
-  currentStep.value = 3 // Jump directly to side-by-side preview
-  scrollToSimulator()
-}
-
-function handleProcessed(data: HairProcessResult) {
-  processResult.value = data
-  currentBaseLevel.value = data.currentColor.level
-  currentHairTone.value = `${data.currentColor.levelName} · ${data.currentColor.undertone}`
+  if (item.user_photo) setPhoto(item.user_photo)
+  setColor({
+    colorHex: item.color_hex,
+    colorName: item.color_name,
+    colorFamily: item.color_family || 'natural',
+    secondaryHex: item.secondary_color_hex
+  })
+  isGalleryOpen.value = false
+  router.push({
+    path: '/simulator',
+    query: { step: '3' }
+  })
 }
 </script>
