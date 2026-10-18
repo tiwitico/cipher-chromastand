@@ -558,7 +558,7 @@
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span class="font-medium">AuraHair Chromastand AI &bull; Google Cloud Run &bull; Gemini 2.5 Flash / Pro &bull; PostgreSQL</span>
         </div>
-        <p>&copy; 2026 AuraHair. Precision Salon Chemical Formulation & Chromatic Color Theory.</p>
+        <p>&copy; 2026 Cipher Team. All rights reserved &bull; AuraHair Chromastand AI.</p>
       </div>
     </footer>
 
