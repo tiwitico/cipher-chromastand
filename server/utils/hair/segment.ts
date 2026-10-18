@@ -81,27 +81,63 @@ function morph(src: Uint8Array, w: number, h: number, r: number, dilate: boolean
   return out
 }
 
-function boxBlur(src: Float32Array, w: number, h: number, r: number) {
+function morphOpen(src: Uint8Array, w: number, h: number, r = 1) {
+  return morph(morph(src, w, h, r, false), w, h, r, true)
+}
+
+function morphClose(src: Uint8Array, w: number, h: number, r = 1) {
+  return morph(morph(src, w, h, r, true), w, h, r, false)
+}
+
+/**
+ * Separable 2D Gaussian blur filter for smooth alpha mask edge feathering (2-5px radius).
+ * Eliminates harsh jagged staircasing and creates natural hair-strand gradient falloffs.
+ */
+function gaussianBlur(src: Float32Array, w: number, h: number, r = 3): Float32Array {
+  const sigma = Math.max(0.8, r / 2)
+  const size = 2 * r + 1
+  const kernel = new Float32Array(size)
+  let kSum = 0
+  for (let i = 0; i < size; i++) {
+    const x = i - r
+    kernel[i] = Math.exp(-(x * x) / (2 * sigma * sigma))
+    kSum += kernel[i]
+  }
+  for (let i = 0; i < size; i++) kernel[i] /= kSum
+
   const tmp = new Float32Array(w * h)
   const out = new Float32Array(w * h)
-  const d = 2 * r + 1
+
+  // Horizontal pass
   for (let y = 0; y < h; y++) {
-    let sum = 0
-    for (let k = -r; k <= r; k++) sum += src[y * w + Math.min(w - 1, Math.max(0, k))]
+    const yOffset = y * w
     for (let x = 0; x < w; x++) {
-      tmp[y * w + x] = sum / d
-      sum += src[y * w + Math.min(w - 1, x + r + 1)] - src[y * w + Math.max(0, x - r)]
+      let sum = 0
+      for (let k = -r; k <= r; k++) {
+        const xx = Math.min(w - 1, Math.max(0, x + k))
+        sum += src[yOffset + xx] * kernel[k + r]
+      }
+      tmp[yOffset + x] = sum
     }
   }
+
+  // Vertical pass
   for (let x = 0; x < w; x++) {
-    let sum = 0
-    for (let k = -r; k <= r; k++) sum += tmp[Math.min(h - 1, Math.max(0, k)) * w + x]
     for (let y = 0; y < h; y++) {
-      out[y * w + x] = sum / d
-      sum += tmp[Math.min(h - 1, y + r + 1) * w + x] - tmp[Math.max(0, y - r) * w + x]
+      let sum = 0
+      for (let k = -r; k <= r; k++) {
+        const yy = Math.min(h - 1, Math.max(0, y + k))
+        sum += tmp[yy * w + x] * kernel[k + r]
+      }
+      out[y * w + x] = sum
     }
   }
+
   return out
+}
+
+function boxBlur(src: Float32Array, w: number, h: number, r: number) {
+  return gaussianBlur(src, w, h, r)
 }
 
 const median = (arr: number[]) => {
@@ -125,12 +161,98 @@ function skinMask(img: RawImage) {
   for (let i = 0; i < w * h; i++) {
     const r = data[i * 3], g = data[i * 3 + 1], b = data[i * 3 + 2]
     const y = 0.299 * r + 0.587 * g + 0.114 * b
-    if (y < 50 || y > 245) continue
+    if (y < 35 || y > 248) continue
     const cb = 128 - 0.168736 * r - 0.331264 * g + 0.5 * b
     const cr = 128 + 0.5 * r - 0.418688 * g - 0.081312 * b
-    if (cr >= 135 && cr <= 175 && cb >= 80 && cb <= 128 && r > g && g >= b * 0.85) m[i] = 1
+    const isYCbCrSkin = cr >= 133 && cr <= 178 && cb >= 77 && cb <= 130
+    const isRgbSkin = r > g && g >= b * 0.8 && r - g >= 8 && r - b >= 10
+    if (isYCbCrSkin && isRgbSkin) m[i] = 1
   }
   return m
+}
+
+/**
+ * Secondary skin-detection and erosion step to prevent dye bleed
+ * onto forehead, temples, ears, neck, and clothing collars.
+ */
+function suppressSkinSpill(
+  hairMask: Uint8Array,
+  img: RawImage,
+  lab: Float32Array,
+  face: FaceInfo | null,
+  faceBin: Uint8Array | null,
+  crownRef: [number, number, number] | null
+): Uint8Array {
+  const { width: w, height: h } = img
+  const n = w * h
+  const cleaned = new Uint8Array(hairMask)
+  const rawSkin = skinMask(img)
+  // Dilate skin by 2px to catch forehead and ear boundaries
+  const skinExpanded = morph(rawSkin, w, h, 2, true)
+
+  const fcx = face?.cx ?? w / 2
+  const ftop = face?.top ?? h * 0.2
+  const fwidth = face?.width ?? w * 0.5
+  const fheight = face?.height ?? h * 0.4
+  const fchin = face?.chin ?? ftop + fheight
+
+  // Sample skin reference color from inner facial region
+  let skinRef: [number, number, number] | null = null
+  const samples: number[] = []
+  const yStart = Math.round(ftop + 0.3 * fheight)
+  const yEnd = Math.round(ftop + 0.65 * fheight)
+  const xStart = Math.round(fcx - 0.25 * fwidth)
+  const xEnd = Math.round(fcx + 0.25 * fwidth)
+  for (let y = yStart; y <= yEnd; y++) {
+    for (let x = xStart; x <= xEnd; x++) {
+      const idx = y * w + x
+      if (rawSkin[idx]) samples.push(idx)
+    }
+  }
+  if (samples.length > 25) {
+    skinRef = [
+      median(samples.map(i => lab[i * 3])),
+      median(samples.map(i => lab[i * 3 + 1])),
+      median(samples.map(i => lab[i * 3 + 2]))
+    ]
+  }
+
+  for (let i = 0; i < n; i++) {
+    if (!cleaned[i]) continue
+    const x = i % w
+    const y = Math.floor(i / w)
+
+    // A. Explicit face boundary from face segmentation model
+    if (faceBin && faceBin[i]) {
+      cleaned[i] = 0
+      continue
+    }
+
+    // B. Forehead & Cheek suppression
+    const isSkin = rawSkin[i] || skinExpanded[i]
+    if (isSkin) {
+      const dSkin = skinRef ? dE(lab, i, skinRef) : 12
+      const dHair = crownRef ? dE(lab, i, crownRef) : 35
+
+      // Forehead / inner face zone: below top of face
+      if (y > ftop + 0.08 * fheight && y < fchin) {
+        if (dSkin < 22 || dSkin < dHair * 0.9) {
+          cleaned[i] = 0
+          continue
+        }
+      }
+
+      // Neck & chest suppression: below chin
+      if (y >= fchin - 0.05 * fheight && Math.abs(x - fcx) < 0.45 * fwidth) {
+        if (dSkin < 25) {
+          cleaned[i] = 0
+          continue
+        }
+      }
+    }
+  }
+
+  return cleaned
 }
 
 function detectFace(skinOpen: Uint8Array, w: number, h: number): FaceInfo | null {
@@ -382,7 +504,7 @@ async function segmentHairHeuristic(img: RawImage, lab: Float32Array): Promise<S
   }
 
   // 6. close small holes, keep the main connected hair region(s)
-  let closed = morph(morph(cand, w, h, 2, true), w, h, 2, false)
+  const closed = morphClose(cand, w, h, 2)
   for (let i = 0; i < n; i++) if (protectedZone[i] || bg[i]) closed[i] = 0
   const { labels, sizes } = labelComponents(closed, w, h)
   if (!sizes.length) {
@@ -390,7 +512,7 @@ async function segmentHairHeuristic(img: RawImage, lab: Float32Array): Promise<S
   }
   const largest = Math.max(...sizes)
   const keep = sizes.map(s => s >= 0.08 * largest)
-  const mask = new Uint8Array(n)
+  let mask = new Uint8Array(n)
   let count = 0
   for (let i = 0; i < n; i++) {
     if (labels[i] >= 0 && keep[labels[i]]) { mask[i] = 1; count++ }
@@ -399,12 +521,19 @@ async function segmentHairHeuristic(img: RawImage, lab: Float32Array): Promise<S
     throw createError({ statusCode: 422, statusMessage: 'Hair could not be detected in this photo.' })
   }
 
-  // 7. soft alpha for natural edges (never leaks into protected zone)
-  const blurred = boxBlur(Float32Array.from(mask), w, h, 2)
+  // Morphological opening to prune stray pixels & skin spill suppression
+  mask = morphOpen(mask, w, h, 1)
+  mask = suppressSkinSpill(mask, img, lab, face, null, crownRef)
+
+  // 7. Gaussian blur edge feathering (2-5px radius) for smooth natural strand transitions
+  const blurred = gaussianBlur(Float32Array.from(mask), w, h, 3)
   const alpha = new Float32Array(n)
   for (let i = 0; i < n; i++) {
     if (protectedZone[i] || bg[i]) continue
-    alpha[i] = Math.max(0, Math.min(1, (blurred[i] - 0.15) / 0.7))
+    const t = Math.max(0, Math.min(1, (blurred[i] - 0.06) / 0.88))
+    let aVal = t * t * (3 - 2 * t)
+    if (skinWide[i]) aVal *= 0.65
+    alpha[i] = Math.max(0, Math.min(1, aVal))
   }
 
   return { alpha, mask, face, crownRef, method, notes }
@@ -488,19 +617,16 @@ async function segmentHairModel(img: RawImage, lab: Float32Array): Promise<Segme
   }
   const face: FaceInfo = { cx: (fl + fr) / 2, top: ft, width: fr - fl + 1, height: fb - ft + 1, chin: fb }
 
-  // keep real hair regions only (drops stray speckles), then smooth the edge
-  const { out: mask, count } = largestComponent(hairBin, w, h, 0.05)
+  // 1. Keep real hair regions only
+  let { out: mask, count } = largestComponent(hairBin, w, h, 0.05)
   if (count < n * 0.004) {
     throw createError({ statusCode: 422, statusMessage: 'Hair could not be detected in this photo (hat, hood or very little hair visible).' })
   }
-  const blurred = boxBlur(Float32Array.from(mask), w, h, 1)
-  const alpha = new Float32Array(n)
-  for (let i = 0; i < n; i++) {
-    if (faceBin[i]) continue // face skin is never touched
-    alpha[i] = Math.max(0, Math.min(1, (blurred[i] - 0.1) / 0.8))
-  }
 
-  // reference colour: hair pixels in the upper part of the hair region
+  // 2. Morphological opening: clean up stray floating pixels from clothes/neck
+  mask = morphOpen(mask, w, h, 1)
+
+  // 3. Reference colour: hair pixels in the upper part of the hair region
   let hairTop = h
   for (let i = 0; i < n; i++) if (mask[i]) { hairTop = Math.min(hairTop, Math.floor(i / w)); break }
   const crownLimit = hairTop + Math.round(0.25 * h)
@@ -509,6 +635,29 @@ async function segmentHairModel(img: RawImage, lab: Float32Array): Promise<Segme
   const crownRef: [number, number, number] | null = crown.length > 40
     ? [median(crown.map(i => lab[i * 3])), median(crown.map(i => lab[i * 3 + 1])), median(crown.map(i => lab[i * 3 + 2]))]
     : null
+
+  // 4. Secondary skin-detection & spill suppression (forehead, temples, ears, neck)
+  mask = suppressSkinSpill(mask, img, lab, face, faceBin, crownRef)
+
+  // 5. Edge feathering with Gaussian blur (radius = 3 pixels for smooth 2-5px gradient)
+  const blurred = gaussianBlur(Float32Array.from(mask), w, h, 3)
+
+  // 6. Soft alpha gradient with cubic smoothstep transition
+  const rawSkin = skinMask(img)
+  const skinExpanded = morph(rawSkin, w, h, 2, true)
+  const alpha = new Float32Array(n)
+  for (let i = 0; i < n; i++) {
+    if (faceBin[i]) continue // face skin is strictly zero
+    const t = Math.max(0, Math.min(1, (blurred[i] - 0.05) / 0.88))
+    let aVal = t * t * (3 - 2 * t)
+
+    // Attenuate hairline edge if adjacent to skin
+    if (skinExpanded[i] && aVal > 0) {
+      aVal *= 0.65
+    }
+
+    alpha[i] = Math.max(0, Math.min(1, aVal))
+  }
 
   return { alpha, mask, face, crownRef, method: 'segformer_hair_model', notes: [] }
 }
