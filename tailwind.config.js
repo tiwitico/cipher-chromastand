@@ -12,6 +12,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        outfit: ['"Outfit"', 'system-ui', 'sans-serif'],
         sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
         serif: ['"Playfair Display"', 'serif'],
       },
