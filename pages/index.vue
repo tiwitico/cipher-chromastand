@@ -26,15 +26,16 @@
 
         <!-- Navigation Links -->
         <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-[#2B2D42]/70">
-          <a href="#features" class="hover:text-[#E07A5F] transition">Features & Science</a>
+          <a href="#features" class="hover:text-[#E07A5F] transition">Why Us vs Filters</a>
           <a href="#how-it-works" class="hover:text-[#E07A5F] transition">How It Works</a>
+          <a href="#for-salons" class="hover:text-[#E07A5F] transition">For Salons & Colorists</a>
           <button
             type="button"
             @click="isAiModalOpen = true"
             class="hover:text-[#E07A5F] transition flex items-center gap-1.5"
           >
             <Bot class="w-3.5 h-3.5 text-[#E07A5F]" />
-            <span>AI Stylist Modal</span>
+            <span>AI Colorist Chat</span>
           </button>
         </nav>
 
@@ -60,7 +61,7 @@
             @click="scrollToSimulator"
             class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-5 py-2.5 text-xs shadow-md hover:opacity-95 transition-all flex items-center gap-1.5 active:scale-95"
           >
-            <span>Start Simulation</span>
+            <span>Simulate Your Look Now</span>
             <ArrowRight class="w-3.5 h-3.5" />
           </button>
         </div>
@@ -75,26 +76,26 @@
         <div class="lg:col-span-7 space-y-6">
           <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#F4F1DE] shadow-sm text-xs font-bold text-[#E07A5F]">
             <Sparkles class="w-3.5 h-3.5" />
-            <span>Google Gemini 2.5 Multimodal Chromatic Vision</span>
+            <span>Powered by Google Gemini 2.5 • Zero Regrets, 100% Predictable Color</span>
           </div>
 
           <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#2B2D42] leading-[1.15]">
-            Simulate Hair Color with <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#E07A5F] to-[#F4A261]">Salon Physics</span>, Not Generic Filters.
+            Never Walk Out of a Salon Wondering If You Made a <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#E07A5F] to-[#F4A261]">Mistake.</span>
           </h1>
 
-          <p class="text-sm sm:text-base text-[#2B2D42]/70 max-w-xl leading-relaxed">
-            AuraHair combines Google Gemini 2.5 multimodal reasoning with CIELAB melanin retention. It isolates your facial undertones, preserves natural specular highlights, and calculates real dispensary chemical formulas (developer volumes, bleach thresholds, and dye grams).
+          <p class="text-sm sm:text-base text-[#2B2D42]/75 max-w-xl leading-relaxed">
+            Stop gambling $250+ and 4 hours in the chair on guesswork. AuraHair combines Google Gemini 2.5 multimodal intelligence with real hair physics—reading your facial undertones and iris chroma to reveal the exact shades that make your features pop, paired with the exact dispensary formula your colorist needs.
           </p>
 
           <!-- CTAs -->
           <div class="flex flex-wrap items-center gap-4 pt-2">
-            <!-- Requested Button Style -->
+            <!-- Primary Action Button -->
             <button
               type="button"
               @click="scrollToSimulator"
               class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-6 py-3 shadow-md hover:opacity-95 transition-all flex items-center gap-2 text-sm active:scale-95"
             >
-              <span>Start Hair Simulation</span>
+              <span>Find My Flawless Shade (Free)</span>
               <ArrowRight class="w-4 h-4" />
             </button>
 
@@ -102,23 +103,23 @@
               href="#features"
               class="px-5 py-3 rounded-xl bg-white hover:bg-[#F4F1DE] text-[#2B2D42] text-sm font-semibold border border-[#F4F1DE] shadow-sm transition"
             >
-              Explore Hair Science &rarr;
+              Why Filters Fail vs AuraHair &rarr;
             </a>
           </div>
 
-          <!-- Trust & Technology Badges -->
-          <div class="pt-6 border-t border-[#F4F1DE] flex flex-wrap items-center gap-6 text-xs text-[#2B2D42]/60 font-semibold">
+          <!-- Trust & Value Badges -->
+          <div class="pt-6 border-t border-[#F4F1DE] flex flex-wrap items-center gap-6 text-xs text-[#2B2D42]/70 font-semibold">
             <div class="flex items-center gap-2">
-              <CheckCircle class="w-4 h-4 text-emerald-600" />
-              <span>Face & Skin Mask Protection</span>
+              <CheckCircle class="w-4 h-4 text-emerald-600 flex-shrink-0" />
+              <span>100% Complexion Harmony</span>
             </div>
             <div class="flex items-center gap-2">
-              <CheckCircle class="w-4 h-4 text-emerald-600" />
-              <span>CIELAB L*a*b* Highlight Retention</span>
+              <CheckCircle class="w-4 h-4 text-emerald-600 flex-shrink-0" />
+              <span>Real Strand Luster (No Flat AI Plastic)</span>
             </div>
             <div class="flex items-center gap-2">
-              <CheckCircle class="w-4 h-4 text-emerald-600" />
-              <span>Real Salon Mixing Grams</span>
+              <CheckCircle class="w-4 h-4 text-emerald-600 flex-shrink-0" />
+              <span>Exact Grams & Developer for Stylists</span>
             </div>
           </div>
         </div>
@@ -129,7 +130,7 @@
             <!-- Floating Pill -->
             <div class="absolute -top-3.5 right-6 bg-[#2B2D42] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>Live Colorist Engine</span>
+              <span>Live Colorist Match</span>
             </div>
 
             <!-- Before/After Split Card Preview -->
@@ -139,11 +140,12 @@
                 alt="Model Baseline"
                 class="w-full h-full object-cover"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex items-end p-4">
                 <div class="w-full flex items-center justify-between text-white">
                   <div>
                     <span class="text-[10px] uppercase font-bold tracking-wider text-[#F4A261] block">Curated Transformation</span>
                     <h4 class="text-sm font-bold">Fiery Irish Copper Balayage</h4>
+                    <span class="text-[11px] text-white/80 block mt-0.5">Harmonizes Warm Golden Undertones</span>
                   </div>
                   <span class="text-xs font-mono font-bold bg-[#E07A5F] px-2.5 py-1 rounded-lg">#B8491A</span>
                 </div>
@@ -157,12 +159,12 @@
                 <span class="font-bold text-[#E07A5F] text-xs">Warm Golden</span>
               </div>
               <div class="bg-[#FDFBF7] p-2.5 rounded-xl border border-[#F4F1DE]">
-                <span class="text-[10px] text-[#2B2D42]/50 font-bold block uppercase">Lift Required</span>
-                <span class="font-bold text-[#2B2D42] text-xs">+3 Levels</span>
+                <span class="text-[10px] text-[#2B2D42]/50 font-bold block uppercase">Safety Lift</span>
+                <span class="font-bold text-[#2B2D42] text-xs">+3 Levels Safe</span>
               </div>
               <div class="bg-[#FDFBF7] p-2.5 rounded-xl border border-[#F4F1DE]">
-                <span class="text-[10px] text-[#2B2D42]/50 font-bold block uppercase">Dispensary Mix</span>
-                <span class="font-bold text-[#F4A261] text-xs">20 Vol Developer</span>
+                <span class="text-[10px] text-[#2B2D42]/50 font-bold block uppercase">Salon Formula</span>
+                <span class="font-bold text-[#F4A261] text-xs">20 Vol + 60g 7.43</span>
               </div>
             </div>
           </div>
@@ -171,18 +173,18 @@
       </div>
     </section>
 
-    <!-- CORE FEATURES SECTION -->
+    <!-- CORE FEATURES SECTION ("WHY FILTERS FAIL VS HOW AURAHAIR WINS") -->
     <section id="features" class="py-20 border-b border-[#F4F1DE] bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
         <div class="text-center max-w-2xl mx-auto space-y-3">
           <span class="text-xs uppercase font-extrabold tracking-wider text-[#E07A5F] bg-[#E07A5F]/10 px-3 py-1 rounded-full">
-            Engineering Excellence
+            The Virtual Makeover Breakthrough
           </span>
           <h2 class="text-3xl font-extrabold text-[#2B2D42] tracking-tight">
-            How AuraHair Solves Real Salon Challenges
+            Why Virtual Makeovers Look Fake—And How We Fixed It
           </h2>
-          <p class="text-sm text-[#2B2D42]/70 leading-relaxed">
-            Generic virtual makeover filters overlay semi-transparent colors that flatten hair highlights and shift skin tones. AuraHair treats hair simulation as physical color chemistry.
+          <p class="text-sm text-[#2B2D42]/75 leading-relaxed">
+            Most makeover apps smear a flat purple or blonde sticker over your head that flattens highlights and clashes with your skin tone. AuraHair treats hair transformation as pure optical physics and dermis harmony.
           </p>
         </div>
 
@@ -192,9 +194,9 @@
             <div class="w-12 h-12 rounded-2xl bg-[#E07A5F]/15 border border-[#E07A5F]/20 flex items-center justify-center text-[#E07A5F]">
               <Eye class="w-6 h-6" />
             </div>
-            <h3 class="text-base font-bold text-[#2B2D42]">Multimodal Chromatic Reasoning</h3>
+            <h3 class="text-base font-bold text-[#2B2D42]">Colors That Make You Glow, Not Wash You Out</h3>
             <p class="text-xs text-[#2B2D42]/70 leading-relaxed">
-              Gemini 2.5 extracts calibrated L*a*b* coordinates for facial dermis and iris warmth, mapping them directly to color theory principles (analogous, complementary, and contrast).
+              Google Gemini 2.5 isolates your exact skin undertones (L*a*b*) and iris chroma. We automatically eliminate shades that make you look pale or sickly, surfacing tones that illuminate your face.
             </p>
           </div>
 
@@ -203,9 +205,9 @@
             <div class="w-12 h-12 rounded-2xl bg-[#F4A261]/20 border border-[#F4A261]/30 flex items-center justify-center text-[#F4A261]">
               <Sparkles class="w-6 h-6" />
             </div>
-            <h3 class="text-base font-bold text-[#2B2D42]">Melanin-Preserving CIELAB</h3>
+            <h3 class="text-base font-bold text-[#2B2D42]">See Real Hair Strands, Not Airbrushed Plastic</h3>
             <p class="text-xs text-[#2B2D42]/70 leading-relaxed">
-              Transforms hair in perceptual CIELAB color space. Luminosity channels ($L^*$) retain natural specular highlights, cuticle reflections, and root shadows without muddying.
+              Our perceptual CIELAB luminosity engine preserves individual strand depth, natural specular shine, cuticle reflections, and root shadows for hyper-photorealistic fidelity.
             </p>
           </div>
 
@@ -214,9 +216,9 @@
             <div class="w-12 h-12 rounded-2xl bg-[#E07A5F]/15 border border-[#E07A5F]/20 flex items-center justify-center text-[#E07A5F]">
               <Beaker class="w-6 h-6" />
             </div>
-            <h3 class="text-base font-bold text-[#2B2D42]">Salon Dispensary Physics</h3>
+            <h3 class="text-base font-bold text-[#2B2D42]">Zero Surprises in the Salon Chair</h3>
             <p class="text-xs text-[#2B2D42]/70 leading-relaxed">
-              Every target shade calculates required lift levels, checks bleaching necessity, and generates exact gram recipes for color tubes, developer volume, and processing times.
+              No more crossing your fingers. AuraHair computes chemical lifting levels, developer volume (10–40 Vol), bleach requirements, and exact dye tube gram ratios your colorist needs to achieve the look.
             </p>
           </div>
 
@@ -225,9 +227,9 @@
             <div class="w-12 h-12 rounded-2xl bg-[#2B2D42]/10 border border-[#2B2D42]/20 flex items-center justify-center text-[#2B2D42]">
               <FileDown class="w-6 h-6" />
             </div>
-            <h3 class="text-base font-bold text-[#2B2D42]">Consultation Card & Share</h3>
+            <h3 class="text-base font-bold text-[#2B2D42]">Walk In With Confidence, Walk Out In Love</h3>
             <p class="text-xs text-[#2B2D42]/70 leading-relaxed">
-              Export professional client consultation cards directly to printable PDF, or share the chemical formulation recipe directly to WhatsApp or Email with one tap.
+              No more awkward Pinterest scrolling or miscommunications. Export a complete dispensary work order to PDF or send the exact recipe straight to your stylist’s WhatsApp in one click.
             </p>
           </div>
         </div>
@@ -238,38 +240,38 @@
     <section id="how-it-works" class="py-16 border-b border-[#F4F1DE] bg-[#FDFBF7]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-10">
         <div class="text-center max-w-xl mx-auto space-y-2">
-          <span class="text-xs uppercase font-extrabold tracking-wider text-[#E07A5F]">Workflow</span>
+          <span class="text-xs uppercase font-extrabold tracking-wider text-[#E07A5F]">Frictionless Experience</span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-[#2B2D42] tracking-tight">
-            Step-by-Step Precision Hair Simulation
+            From Selfie to Salon Perfection in 4 Easy Steps
           </h2>
           <p class="text-xs sm:text-sm text-[#2B2D42]/70">
-            From selfie portrait to dispensary-ready chemical recipe in 4 seamless steps
+            No guesswork, no chemical disasters, and zero regret.
           </p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="bg-white p-5 rounded-2xl border border-[#F4F1DE] shadow-sm">
+          <div class="bg-white p-5 rounded-2xl border border-[#F4F1DE] shadow-sm hover:shadow-md transition">
             <span class="text-2xl font-black text-[#E07A5F]/40 font-mono block mb-2">01</span>
-            <h4 class="text-sm font-bold text-[#2B2D42] mb-1">Upload or Capture Selfie</h4>
-            <p class="text-xs text-[#2B2D42]/70">Use webcam with live lighting feedback, upload photo, or pick studio models.</p>
+            <h4 class="text-sm font-bold text-[#2B2D42] mb-1">Snap or Upload Your Canvas</h4>
+            <p class="text-xs text-[#2B2D42]/70">Snap a quick selfie with live lighting feedback or choose our studio models. We analyze your baseline hair level instantly.</p>
           </div>
 
-          <div class="bg-white p-5 rounded-2xl border border-[#F4F1DE] shadow-sm">
+          <div class="bg-white p-5 rounded-2xl border border-[#F4F1DE] shadow-sm hover:shadow-md transition">
             <span class="text-2xl font-black text-[#F4A261]/40 font-mono block mb-2">02</span>
-            <h4 class="text-sm font-bold text-[#2B2D42] mb-1">Pick Color or AI Advice</h4>
-            <p class="text-xs text-[#2B2D42]/70">Review Gemini chromatic harmonies for your undertone, or customize shade & technique.</p>
+            <h4 class="text-sm font-bold text-[#2B2D42] mb-1">Unlock Your Flawless AI Palette</h4>
+            <p class="text-xs text-[#2B2D42]/70">Gemini 2.5 decodes your undertones and curates tailored Analogous, Complementary, and Statement shades.</p>
           </div>
 
-          <div class="bg-white p-5 rounded-2xl border border-[#F4F1DE] shadow-sm">
+          <div class="bg-white p-5 rounded-2xl border border-[#F4F1DE] shadow-sm hover:shadow-md transition">
             <span class="text-2xl font-black text-[#E07A5F]/40 font-mono block mb-2">03</span>
-            <h4 class="text-sm font-bold text-[#2B2D42] mb-1">Realistic Preview</h4>
-            <p class="text-xs text-[#2B2D42]/70">Inspect results with side-by-side comparison and before/after interactive wipe slider.</p>
+            <h4 class="text-sm font-bold text-[#2B2D42] mb-1">Inspect True-To-Life Results</h4>
+            <p class="text-xs text-[#2B2D42]/70">Test dynamic shades with interactive side-by-side and wipe sliders that preserve natural sheen and strand depth.</p>
           </div>
 
-          <div class="bg-white p-5 rounded-2xl border border-[#F4F1DE] shadow-sm">
+          <div class="bg-white p-5 rounded-2xl border border-[#F4F1DE] shadow-sm hover:shadow-md transition">
             <span class="text-2xl font-black text-[#2B2D42]/30 font-mono block mb-2">04</span>
-            <h4 class="text-sm font-bold text-[#2B2D42] mb-1">Formulate & Share</h4>
-            <p class="text-xs text-[#2B2D42]/70">Review chemical grams, download PDF consultation sheet, or share to WhatsApp.</p>
+            <h4 class="text-sm font-bold text-[#2B2D42] mb-1">Hand the Recipe to Your Stylist</h4>
+            <p class="text-xs text-[#2B2D42]/70">Download a dispensary card with exact developer volumes, tube grams, and aftercare recommendations ready for your appointment.</p>
           </div>
         </div>
       </div>
@@ -296,7 +298,7 @@
                 1
               </div>
               <div class="overflow-hidden">
-                <span class="text-xs font-bold block truncate">1. Selfie & Base</span>
+                <span class="text-xs font-bold block truncate">1. Baseline Canvas</span>
                 <span class="text-[10px] text-[#2B2D42]/60 block truncate">Auto-read Level {{ currentBaseLevel }}</span>
               </div>
             </button>
@@ -315,7 +317,7 @@
                 2
               </div>
               <div class="overflow-hidden">
-                <span class="text-xs font-bold block truncate">2. Target Color</span>
+                <span class="text-xs font-bold block truncate">2. Harmonic Shade</span>
                 <span class="text-[10px] text-[#2B2D42]/60 block truncate">{{ currentColorName }}</span>
               </div>
             </button>
@@ -334,8 +336,8 @@
                 3
               </div>
               <div class="overflow-hidden">
-                <span class="text-xs font-bold block truncate">3. Side-by-Side</span>
-                <span class="text-[10px] text-[#2B2D42]/60 block truncate">Before / After Preview</span>
+                <span class="text-xs font-bold block truncate">3. True Mirror Split</span>
+                <span class="text-[10px] text-[#2B2D42]/60 block truncate">Before / After Review</span>
               </div>
             </button>
 
@@ -353,8 +355,8 @@
                 4
               </div>
               <div class="overflow-hidden">
-                <span class="text-xs font-bold block truncate">4. Formula & Share</span>
-                <span class="text-[10px] text-[#2B2D42]/60 block truncate">PDF & WhatsApp</span>
+                <span class="text-xs font-bold block truncate">4. Salon Work Order</span>
+                <span class="text-[10px] text-[#2B2D42]/60 block truncate">PDF & WhatsApp Recipe</span>
               </div>
             </button>
           </div>
@@ -376,8 +378,8 @@
                     <User class="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 class="text-lg font-bold text-[#2B2D42]">Step 1: Your Natural Canvas</h3>
-                    <p class="text-xs text-[#2B2D42]/60 mt-0.5">The engine isolates hair pixels while strictly protecting facial skin</p>
+                    <h3 class="text-lg font-bold text-[#2B2D42]">Step 1: Your Baseline Canvas</h3>
+                    <p class="text-xs text-[#2B2D42]/60 mt-0.5">Lighting calibration and skin protection ensure streak-free, predictable color</p>
                   </div>
                 </div>
 
@@ -551,12 +553,138 @@
       </div>
     </section>
 
+    <!-- B2B & SALON SUITE SECTION -->
+    <section id="for-salons" class="py-20 border-b border-[#F4F1DE] bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
+        <div class="text-center max-w-3xl mx-auto space-y-3">
+          <span class="text-xs uppercase font-extrabold tracking-wider text-[#E07A5F] bg-[#E07A5F]/10 px-3.5 py-1 rounded-full">
+            For Salons, Stylists & Beauty Brands
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-[#2B2D42] tracking-tight">
+            Cut Consultation Time in Half. Eliminate $200+ Color Correction Redos.
+          </h2>
+          <p class="text-sm sm:text-base text-[#2B2D42]/75 leading-relaxed">
+            Transform your chair into a high-margin, zero-dispute consultation experience. AuraHair bridges the gap between what clients imagine and what salon chemistry can safely achieve.
+          </p>
+        </div>
+
+        <!-- 3 B2B Pillars -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Pillar 1 -->
+          <div class="bg-[#FDFBF7] p-8 rounded-3xl border border-[#F4F1DE] space-y-4 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-2xl bg-[#E07A5F]/15 border border-[#E07A5F]/20 flex items-center justify-center text-[#E07A5F]">
+              <Clock class="w-6 h-6" />
+            </div>
+            <h3 class="text-lg font-bold text-[#2B2D42]">50% Shorter Consultations</h3>
+            <p class="text-xs sm:text-sm text-[#2B2D42]/70 leading-relaxed">
+              Align on realistic target shades in 90 seconds. Clients see safe lift feasibility upfront on screen before you ever touch a bowl of bleach.
+            </p>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="bg-[#FDFBF7] p-8 rounded-3xl border border-[#F4F1DE] space-y-4 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-2xl bg-[#F4A261]/20 border border-[#F4A261]/30 flex items-center justify-center text-[#F4A261]">
+              <ShieldCheck class="w-6 h-6" />
+            </div>
+            <h3 class="text-lg font-bold text-[#2B2D42]">Zero "That's Not What I Wanted" Disputes</h3>
+            <p class="text-xs sm:text-sm text-[#2B2D42]/70 leading-relaxed">
+              Eliminate miscommunication and costly unpaid re-dos. Both colorist and client review the exact visual target, required developer, and expected lift together.
+            </p>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="bg-[#FDFBF7] p-8 rounded-3xl border border-[#F4F1DE] space-y-4 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
+              <TrendingUp class="w-6 h-6" />
+            </div>
+            <h3 class="text-lg font-bold text-[#2B2D42]">+35% Boost in Retail Aftercare Upsells</h3>
+            <p class="text-xs sm:text-sm text-[#2B2D42]/70 leading-relaxed">
+              Every generated client consultation card automatically matches bond builders (Olaplex/K18), toning shampoos, and gloss treatments for instant retail checkout.
+            </p>
+          </div>
+        </div>
+
+        <!-- Salon Proof Metric Banner -->
+        <div class="bg-gradient-to-r from-[#2B2D42] to-[#3A3D5A] rounded-3xl p-6 sm:p-8 text-white shadow-xl">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+            <div class="space-y-1 pt-2 sm:pt-0">
+              <span class="text-3xl sm:text-4xl font-extrabold text-[#F4A261] font-mono">98%</span>
+              <p class="text-xs text-white/70 font-medium">Client Color Satisfaction</p>
+            </div>
+            <div class="space-y-1 pt-4 sm:pt-0">
+              <span class="text-3xl sm:text-4xl font-extrabold text-[#E07A5F] font-mono">0</span>
+              <p class="text-xs text-white/70 font-medium">Bleach Level Surprises</p>
+            </div>
+            <div class="space-y-1 pt-4 sm:pt-0">
+              <span class="text-3xl sm:text-4xl font-extrabold text-emerald-400 font-mono">3.5x</span>
+              <p class="text-xs text-white/70 font-medium">Faster Color Decision-Making</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL-TO-ACTION BANNER -->
+    <section class="py-16 md:py-20 bg-gradient-to-b from-white to-[#FDFBF7]">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="bg-gradient-to-tr from-[#2B2D42] via-[#2F3249] to-[#2B2D42] rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-2xl border border-white/10 text-center space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#F4A261] text-xs font-bold border border-white/10">
+            <Sparkles class="w-3.5 h-3.5" />
+            <span>Risk-Free Hair Transformation</span>
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-2xl mx-auto leading-tight">
+            Stop Guessing. <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#E07A5F] to-[#F4A261]">Start Glowing.</span>
+          </h2>
+
+          <p class="text-sm sm:text-base text-white/75 max-w-xl mx-auto leading-relaxed">
+            Never gamble hundreds of dollars and hours in the chair on a color disaster again. Test your tailored shade and claim your dispensary recipe in 30 seconds.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <button
+              type="button"
+              @click="scrollToSimulator"
+              class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-7 py-3.5 shadow-lg hover:opacity-95 transition-all flex items-center gap-2 text-sm active:scale-95"
+            >
+              <span>Simulate Your Look Now (Free)</span>
+              <ArrowRight class="w-4 h-4" />
+            </button>
+
+            <button
+              type="button"
+              @click="isGalleryOpen = true"
+              class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-sm font-semibold border border-white/20 transition flex items-center gap-2"
+            >
+              <BookmarkCheck class="w-4 h-4 text-[#F4A261]" />
+              <span>Browse Saved Looks</span>
+            </button>
+          </div>
+
+          <div class="pt-6 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 text-xs text-white/60">
+            <div class="flex items-center gap-1.5">
+              <CheckCircle class="w-4 h-4 text-emerald-400" />
+              <span>Instant 30-Second Simulation</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <CheckCircle class="w-4 h-4 text-emerald-400" />
+              <span>No Credit Card Required</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <CheckCircle class="w-4 h-4 text-emerald-400" />
+              <span>100% Zero Filter Distortion</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="border-t border-[#F4F1DE] bg-white py-10 text-xs text-[#2B2D42]/60">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="font-medium">AuraHair Chromastand AI &bull; Google Cloud Run &bull; Gemini 2.5 Flash / Pro &bull; PostgreSQL</span>
+          <span class="font-medium">AuraHair Chromastand AI</span>
         </div>
         <p>&copy; 2026 Cipher Team. All rights reserved &bull; AuraHair Chromastand AI.</p>
       </div>
@@ -592,7 +720,10 @@ import {
   Eye,
   Beaker,
   FileDown,
-  ArrowRight
+  ArrowRight,
+  ShieldCheck,
+  TrendingUp,
+  Clock
 } from 'lucide-vue-next'
 import { SAMPLE_MODELS } from '~/utils/sampleModels'
 import type { HairProcessResult } from '~/components/HairSimulatorCanvas.vue'

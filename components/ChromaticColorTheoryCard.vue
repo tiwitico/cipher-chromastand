@@ -14,7 +14,7 @@
               Color Theory Engine
             </span>
           </div>
-          <p class="text-xs text-[#2B2D42]/60 mt-0.5">Multimodal facial tone extraction & CIELAB chromatic harmony mapping</p>
+          <p class="text-xs text-[#2B2D42]/60 mt-0.5">Multimodal dermis analysis to curate shades guaranteed to illuminate your complexion</p>
         </div>
       </div>
 
@@ -23,11 +23,11 @@
         type="button"
         @click="runAnalysis"
         :disabled="isLoading"
-        class="self-start sm:self-auto bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-5 py-2.5 text-xs shadow-md hover:opacity-95 transition-all flex items-center gap-2 active:scale-95 disabled:opacity-50"
+        class="bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white font-medium rounded-xl px-5 py-2.5 text-xs shadow-md hover:opacity-95 transition-all flex items-center gap-2 active:scale-95 disabled:opacity-50"
       >
         <RefreshCw v-if="isLoading" class="w-3.5 h-3.5 animate-spin" />
         <Wand2 v-else class="w-3.5 h-3.5" />
-        <span>{{ isLoading ? 'Analyzing Chromatic Vectors...' : 'Analyze Facial Chroma' }}</span>
+        <span>{{ isLoading ? 'Decoding Complexion Vectors...' : 'Unlock My Harmonic Shades' }}</span>
       </button>
     </div>
 

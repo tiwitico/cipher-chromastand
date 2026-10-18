@@ -16,13 +16,13 @@
         <div>
           <div class="flex items-center gap-2">
             <h3 class="text-xl font-bold tracking-tight text-[#2B2D42]">
-              Color Formulation & Substances Recipe
+              Salon Chemistry Formulation & Work Order
             </h3>
             <span class="text-[11px] px-2.5 py-0.5 rounded-full font-semibold bg-[#F4F1DE] text-[#2B2D42] border border-[#E8E2CD]">
-              Salon Professional Mix
+              Dispensary Ready
             </span>
           </div>
-          <p class="text-xs text-[#2B2D42]/60 mt-0.5">Dispensary mixing ratios, developer volume, and bleaching procedure</p>
+          <p class="text-xs text-[#2B2D42]/60 mt-0.5">Exact grams, developer volume, and bleaching procedure ready for your colorist</p>
         </div>
       </div>
 
@@ -36,7 +36,7 @@
           title="Download printable salon consultation card as PDF"
         >
           <FileDown class="w-4 h-4 text-[#E07A5F]" />
-          <span>Download PDF</span>
+          <span>Download PDF Work Order</span>
         </button>
 
         <!-- Share to WhatsApp -->
@@ -47,7 +47,7 @@
           title="Share formula directly to WhatsApp"
         >
           <Share2 class="w-4 h-4 text-[#25D366]" />
-          <span>WhatsApp</span>
+          <span>Send to WhatsApp</span>
         </button>
 
         <!-- Share to Email -->
@@ -58,7 +58,7 @@
           title="Email consultation sheet"
         >
           <Mail class="w-4 h-4 text-[#F4A261]" />
-          <span>Email</span>
+          <span>Email Stylist</span>
         </button>
 
         <!-- Save Simulation Button (with requested gradient) -->
